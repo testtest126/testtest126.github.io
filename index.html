@@ -96,29 +96,31 @@
     opacity:.9;
   }
   .device-frame{
-    margin-bottom:18px;border-radius:22px;padding:8px;
+    --frame-h:236px;
+    height:var(--frame-h);margin-bottom:18px;border-radius:16px;
+    overflow:hidden;position:relative;
     background:
       linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,0) 45%),
       #0b0b0e;
     border:1px solid var(--line);
-    box-shadow:0 24px 48px -28px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.02);
+    box-shadow:0 14px 30px -20px rgba(0,0,0,.65), inset 0 0 0 1px rgba(255,255,255,.02);
   }
-  .device-frame img{width:100%;display:block;border-radius:15px;}
+  .device-frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;}
   .device-frame.browser{
-    padding:0;overflow:hidden;border-radius:14px;
-    background:#0d0d10;
+    display:flex;flex-direction:column;background:#0d0d10;
   }
-  .device-frame.browser img{border-radius:0;display:block}
+  .device-frame.browser img{flex:1 1 auto;min-height:0;width:100%;object-fit:cover;object-position:top center;}
   .device-frame.browser .chrome{
-    display:flex;align-items:center;gap:6px;padding:11px 14px;
+    flex:0 0 auto;
+    display:flex;align-items:center;gap:6px;padding:9px 13px;
     background:#16161c;border-bottom:1px solid var(--line);
   }
-  .device-frame.browser .chrome .dot{width:9px;height:9px;border-radius:50%;background:#34343d}
+  .device-frame.browser .chrome .dot{width:8px;height:8px;border-radius:50%;background:#34343d}
   .device-frame.browser .chrome .dot:nth-child(1){background:#4a4a54}
   .device-frame.browser .chrome .url{
-    margin-left:8px;flex:1;font-size:11.5px;color:var(--muted);
+    margin-left:8px;flex:1;font-size:11px;color:var(--muted);
     background:#0a0a0c;border:1px solid var(--line);border-radius:7px;
-    padding:4px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    padding:3px 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .card h3{font-size:19px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px}
   .pill{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;letter-spacing:.03em}
@@ -162,7 +164,7 @@
   <div class="grid">
 
     <div class="card" style="--bar:linear-gradient(90deg,#c9a24a,transparent)">
-      <div class="device-frame phone"><img src="assets/chess-game.jpg" width="750" height="1337" alt="MateMate mid-game board, dark blue theme, with move history" loading="lazy"></div>
+      <div class="device-frame phone"><img src="assets/chess-game.jpg" width="750" height="1337" style="object-position:center 40%" alt="MateMate mid-game board, dark blue theme, with move history" loading="lazy"></div>
       <h3>MateMate <span class="pill pub">chess</span></h3>
       <div class="role">iOS chess app · Swift + Vapor</div>
       <p>A full chess app with a built-in engine, realtime online multiplayer over a Vapor backend, and post-game analysis. Server-authoritative game integrity, warm-classic UI.</p>
@@ -180,7 +182,7 @@
     </div>
 
     <div class="card" style="--bar:linear-gradient(90deg,#6d8bd0,transparent)">
-      <div class="device-frame phone"><img src="assets/ai-demo-guided.jpg" width="750" height="417" alt="ai-demo Guided Generation tab — structured trip-plan form" loading="lazy"></div>
+      <div class="device-frame phone"><img src="assets/ai-demo-guided.jpg" width="750" height="417" style="object-position:left top" alt="ai-demo Guided Generation tab — structured trip-plan form" loading="lazy"></div>
       <h3>ai-demo <span class="pill pub">on-device AI</span></h3>
       <div class="role">Apple FoundationModels · SwiftUI</div>
       <p>A focused demo of Apple's on-device FoundationModels framework — local language-model inference in SwiftUI with SwiftData, graceful availability handling, zero network calls.</p>
