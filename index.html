@@ -75,9 +75,9 @@
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
   @media(max-width:720px){.grid{grid-template-columns:1fr}}
   .card.wide{grid-column:1 / -1;flex-direction:row;gap:26px;align-items:stretch}
-  .card.wide .thumbnail{width:320px;height:auto;min-height:220px;margin-bottom:0;flex-shrink:0}
+  .card.wide .device-frame{width:280px;margin-bottom:0;flex-shrink:0;align-self:flex-start}
   .card.wide .body{display:flex;flex-direction:column;flex:1}
-  @media(max-width:720px){.card.wide{flex-direction:column}.card.wide .thumbnail{width:100%;height:220px;min-height:220px}}
+  @media(max-width:720px){.card.wide{flex-direction:column}.card.wide .device-frame{width:100%}}
   .pill.new{background:rgba(155,123,216,.18);color:#c3aef0}
   .card{
     position:relative;
@@ -95,18 +95,30 @@
     background:var(--bar,linear-gradient(90deg,var(--accent),transparent));
     opacity:.9;
   }
-  .thumbnail{
-    height:220px;border-radius:12px;margin-bottom:18px;
-    border:1px solid var(--line);
-    display:flex;align-items:center;justify-content:center;
-    color:rgba(255,255,255,.35);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  .device-frame{
+    margin-bottom:18px;border-radius:22px;padding:8px;
     background:
-      linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0)) ,
-      var(--thumbbg,#101016);
-    overflow:hidden;
+      linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,0) 45%),
+      #0b0b0e;
+    border:1px solid var(--line);
+    box-shadow:0 24px 48px -28px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.02);
   }
-  .thumbnail img{
-    width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  .device-frame img{width:100%;display:block;border-radius:15px;}
+  .device-frame.browser{
+    padding:0;overflow:hidden;border-radius:14px;
+    background:#0d0d10;
+  }
+  .device-frame.browser img{border-radius:0;display:block}
+  .device-frame.browser .chrome{
+    display:flex;align-items:center;gap:6px;padding:11px 14px;
+    background:#16161c;border-bottom:1px solid var(--line);
+  }
+  .device-frame.browser .chrome .dot{width:9px;height:9px;border-radius:50%;background:#34343d}
+  .device-frame.browser .chrome .dot:nth-child(1){background:#4a4a54}
+  .device-frame.browser .chrome .url{
+    margin-left:8px;flex:1;font-size:11.5px;color:var(--muted);
+    background:#0a0a0c;border:1px solid var(--line);border-radius:7px;
+    padding:4px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .card h3{font-size:19px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px}
   .pill{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;letter-spacing:.03em}
@@ -150,7 +162,7 @@
   <div class="grid">
 
     <div class="card" style="--bar:linear-gradient(90deg,#c9a24a,transparent)">
-      <div class="thumbnail" style="--thumbbg:#12100a"><img src="assets/chess-home.jpg" alt="MateMate home screen — play online, play the engine, appearance settings" loading="lazy"></div>
+      <div class="device-frame phone"><img src="assets/chess-game.jpg" alt="MateMate mid-game board, dark blue theme, with move history" loading="lazy"></div>
       <h3>MateMate <span class="pill pub">chess</span></h3>
       <div class="role">iOS chess app · Swift + Vapor</div>
       <p>A full chess app with a built-in engine, realtime online multiplayer over a Vapor backend, and post-game analysis. Server-authoritative game integrity, warm-classic UI.</p>
@@ -159,7 +171,7 @@
     </div>
 
     <div class="card" style="--bar:linear-gradient(90deg,#b5495b,transparent)">
-      <div class="thumbnail" style="--thumbbg:#140b0e"><img src="assets/lull-title.jpg" alt="LULL consent screen — a sleep aid, let it watch or not tonight" loading="lazy"></div>
+      <div class="device-frame phone"><img src="assets/lull-eye.jpg" alt="LULL consent screen — a sleep aid, let it watch or not tonight" loading="lazy"></div>
       <h3>LULL <span class="pill pub">horror</span></h3>
       <div class="role">Psychological horror game · consent-first</div>
       <p>An OD-inspired horror game for iPhone that turns the device's own intimacy against the player. Forbidden sensors can't even be named in code — the safety rule is enforced by the type system.</p>
@@ -168,7 +180,7 @@
     </div>
 
     <div class="card" style="--bar:linear-gradient(90deg,#6d8bd0,transparent)">
-      <div class="thumbnail" style="--thumbbg:#0b0f16"><img src="assets/ai-demo-chat.jpg" alt="ai-demo Chat tab with on-device model input and tab bar" loading="lazy"></div>
+      <div class="device-frame phone"><img src="assets/ai-demo-guided.jpg" alt="ai-demo Guided Generation tab — structured trip-plan form" loading="lazy"></div>
       <h3>ai-demo <span class="pill pub">on-device AI</span></h3>
       <div class="role">Apple FoundationModels · SwiftUI</div>
       <p>A focused demo of Apple's on-device FoundationModels framework — local language-model inference in SwiftUI with SwiftData, graceful availability handling, zero network calls.</p>
@@ -177,7 +189,10 @@
     </div>
 
     <div class="card" style="--bar:linear-gradient(90deg,#8ad0a9,transparent)">
-      <div class="thumbnail" style="--thumbbg:#0a1310"><img src="assets/agent-ready-docs.jpg" alt="agent-ready documentation site — the theory behind the kit" loading="lazy"></div>
+      <div class="device-frame browser">
+        <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">testtest126.github.io/agent-ready</span></div>
+        <img src="assets/agent-ready-docs.jpg" alt="agent-ready documentation site — the theory behind the kit" loading="lazy">
+      </div>
       <h3>agent-ready <span class="pill pub">tooling</span></h3>
       <div class="role">Conventions for AI collaboration</div>
       <p>Context-free, pluggable conventions that make any repository ready for AI collaboration: one AGENTS.md, tool adapters for Claude Code / Copilot / Cursor, and a memory scaffold.</p>
@@ -186,7 +201,7 @@
     </div>
 
     <div class="card wide" style="--bar:linear-gradient(90deg,#9b7bd8,transparent)">
-      <div class="thumbnail" style="--thumbbg:#0d0a14"><img src="assets/poker-home.jpg" alt="Poker Study home screen listing the five planned tools" loading="lazy"></div>
+      <div class="device-frame phone"><img src="assets/poker-home.jpg" alt="Poker Study home screen listing the five planned tools" loading="lazy"></div>
       <div class="body">
         <h3>poker <span class="pill new">newest</span></h3>
         <div class="role">Personalized NLHE tournament study helper</div>
