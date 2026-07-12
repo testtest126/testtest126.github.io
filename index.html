@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yakiv Kovalskyi</title>
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --panel:#131318;
+    --panel-2:#17171e;
+    --line:#26262f;
+    --txt:#e9e9ee;
+    --muted:#9a9aa6;
+    --accent:#c9a24a;
+    --accent-2:#6d8bd0;
+    --danger:#b5495b;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  header.hero{
+    position:relative;
+    padding:120px 0 80px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-glow{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(600px 300px at 20% -10%, rgba(201,162,74,.18), transparent 60%),
+      radial-gradient(500px 320px at 90% 10%, rgba(109,139,208,.14), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1}
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+    border:1px solid rgba(201,162,74,.3);
+    padding:5px 12px;border-radius:100px;margin-bottom:22px;
+  }
+  h1{
+    font-size:clamp(38px,6vw,68px);
+    font-weight:700;letter-spacing:-.02em;line-height:1.05;
+    margin-bottom:18px;
+  }
+  h1 .grad{
+    background:linear-gradient(90deg,#fff, #c9a24a 70%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:620px}
+  .cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:11px 20px;border-radius:12px;font-weight:600;font-size:15px;
+    text-decoration:none;transition:.18s ease;
+  }
+  .btn.primary{background:var(--accent);color:#1a1408}
+  .btn.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn.ghost{border:1px solid var(--line);color:var(--txt)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  section.projects{padding:80px 0 40px}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:34px;gap:16px;flex-wrap:wrap}
+  .sec-head h2{font-size:26px;font-weight:700;letter-spacing:-.01em}
+  .sec-head span{color:var(--muted);font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card.wide{grid-column:1 / -1;flex-direction:row;gap:26px;align-items:stretch}
+  .card.wide .thumbnail{width:280px;height:auto;min-height:150px;margin-bottom:0;flex-shrink:0}
+  .card.wide .body{display:flex;flex-direction:column;flex:1}
+  @media(max-width:720px){.card.wide{flex-direction:column}.card.wide .thumbnail{width:100%;min-height:120px}}
+  .pill.new{background:rgba(155,123,216,.18);color:#c3aef0}
+  .card{
+    position:relative;
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 26px 22px;
+    display:flex;flex-direction:column;
+    transition:.2s ease;
+    overflow:hidden;
+  }
+  .card:hover{transform:translateY(-3px);border-color:rgba(201,162,74,.4)}
+  .card::before{
+    content:"";position:absolute;left:0;top:0;height:3px;width:100%;
+    background:var(--bar,linear-gradient(90deg,var(--accent),transparent));
+    opacity:.9;
+  }
+  .thumbnail{
+    height:132px;border-radius:12px;margin-bottom:18px;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(255,255,255,.35);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0)) ,
+      var(--thumbbg,#101016);
+  }
+  .card h3{font-size:19px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+  .pill{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;letter-spacing:.03em}
+  .pill.pub{background:rgba(109,139,208,.16);color:#a9bef0}
+  .card .role{color:var(--accent);font-size:13px;font-weight:600;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:14.5px;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 14px}
+  .tag{font-size:11.5px;color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:7px}
+  .card a.view{
+    text-decoration:none;color:var(--txt);font-size:13.5px;font-weight:600;
+    display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+  }
+  .card a.view:hover{color:var(--accent)}
+  footer{border-top:1px solid var(--line);padding:44px 0 60px;margin-top:50px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+  .foot a{color:var(--muted);text-decoration:none}
+  .foot a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">iOS · Swift · AI-native</span>
+    <h1>Yakiv <span class="grad">Kovalskyi</span></h1>
+    <p class="lede">I build native iOS apps in pure Swift — a chess engine with realtime multiplayer, an on-device AI demo, a consent-first horror game, and the conventions that let AI agents work on any repo.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">View projects ↓</a>
+      <a class="btn ghost" href="https://github.com/testtest126" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<section class="projects wrap" id="projects">
+  <div class="sec-head">
+    <h2>Selected work</h2>
+    <span>5 projects · all open source</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="card" style="--bar:linear-gradient(90deg,#c9a24a,transparent)">
+      <div class="thumbnail" style="--thumbbg:#12100a">screenshot / demo gif</div>
+      <h3>MateMate <span class="pill pub">chess</span></h3>
+      <div class="role">iOS chess app · Swift + Vapor</div>
+      <p>A full chess app with a built-in engine, realtime online multiplayer over a Vapor backend, and post-game analysis. Server-authoritative game integrity, warm-classic UI.</p>
+      <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">Vapor</span><span class="tag">WebSockets</span></div>
+      <a class="view" href="https://github.com/testtest126/chess" target="_blank">View on GitHub →</a>
+    </div>
+
+    <div class="card" style="--bar:linear-gradient(90deg,#b5495b,transparent)">
+      <div class="thumbnail" style="--thumbbg:#140b0e">screenshot / demo gif</div>
+      <h3>LULL <span class="pill pub">horror</span></h3>
+      <div class="role">Psychological horror game · consent-first</div>
+      <p>An OD-inspired horror game for iPhone that turns the device's own intimacy against the player. Forbidden sensors can't even be named in code — the safety rule is enforced by the type system.</p>
+      <div class="tags"><span class="tag">Swift</span><span class="tag">AVFoundation</span><span class="tag">MIT</span></div>
+      <a class="view" href="https://github.com/testtest126/LULL" target="_blank">View on GitHub →</a>
+    </div>
+
+    <div class="card" style="--bar:linear-gradient(90deg,#6d8bd0,transparent)">
+      <div class="thumbnail" style="--thumbbg:#0b0f16">screenshot / demo gif</div>
+      <h3>ai-demo <span class="pill pub">on-device AI</span></h3>
+      <div class="role">Apple FoundationModels · SwiftUI</div>
+      <p>A focused demo of Apple's on-device FoundationModels framework — local language-model inference in SwiftUI with SwiftData, graceful availability handling, zero network calls.</p>
+      <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">FoundationModels</span></div>
+      <a class="view" href="https://github.com/testtest126/ai-demo" target="_blank">View on GitHub →</a>
+    </div>
+
+    <div class="card" style="--bar:linear-gradient(90deg,#8ad0a9,transparent)">
+      <div class="thumbnail" style="--thumbbg:#0a1310">screenshot / diagram</div>
+      <h3>agent-ready <span class="pill pub">tooling</span></h3>
+      <div class="role">Conventions for AI collaboration</div>
+      <p>Context-free, pluggable conventions that make any repository ready for AI collaboration: one AGENTS.md, tool adapters for Claude Code / Copilot / Cursor, and a memory scaffold.</p>
+      <div class="tags"><span class="tag">Shell</span><span class="tag">AGENTS.md</span><span class="tag">DX</span><span class="tag">MIT</span></div>
+      <a class="view" href="https://github.com/testtest126/agent-ready" target="_blank">View on GitHub →</a>
+    </div>
+
+    <div class="card wide" style="--bar:linear-gradient(90deg,#9b7bd8,transparent)">
+      <div class="thumbnail" style="--thumbbg:#0d0a14">screenshot / demo gif</div>
+      <div class="body">
+        <h3>poker <span class="pill new">newest</span></h3>
+        <div class="role">Personalized NLHE tournament study helper</div>
+        <p>A study &amp; prep companion for No-Limit Hold'em tournaments, personalized to each player's own tendencies and leaks: preflop ranges, an ICM / push-fold trainer, a bankroll tracker, hand-history import with leak-finding, and targeted drills. On-device and privacy-first — built for study away from the table, not real-time play.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">On-device</span><span class="tag">ICM</span><span class="tag">MIT</span></div>
+        <a class="view" href="https://github.com/testtest126/poker" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Yakiv Kovalskyi</span>
+    <span>
+      <a href="https://github.com/testtest126" target="_blank">GitHub</a> ·
+      <a href="mailto:ykovalsky.up@gmail.com">Email</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
