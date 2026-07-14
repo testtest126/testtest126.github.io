@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Does This Print? A GCD Ordering Trainer</title>
+<style>
+  :root{
+    --bg:#07090b; --panel:#0d1013; --line:#1c2228; --ink:#e9e6df; --mut:#8b95a0;
+    --gold:#c9a24a; --jade:#4bbf82; --red:#c0413b; --blue:#5f86c9;
+    --serif:Georgia,'Iowan Old Style',serif; --mono:'Courier New',monospace;
+  }
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold)}
+  header{position:relative;padding:120px 0 70px;border-bottom:1px solid var(--line);overflow:hidden}
+  .glow{position:absolute;inset:0;background:radial-gradient(650px 320px at 22% -10%,rgba(192,65,59,.16),transparent 60%),radial-gradient(560px 340px at 88% 8%,rgba(75,191,130,.12),transparent 60%);pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--jade);margin-bottom:22px}
+  h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.02em;font-weight:400}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin-top:22px;font-size:clamp(18px,2.4vw,22px);color:var(--mut);max-width:640px}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:400;letter-spacing:-.01em;margin-bottom:20px}
+  h2 em{font-style:italic;color:var(--gold)}
+  p{font-size:17.5px;color:#cdd2d7;margin-bottom:18px}
+  p .m{font-family:var(--mono);font-size:.9em;color:var(--jade);background:#0e1614;border:1px solid #1c2b25;padding:1px 6px;border-radius:5px}
+  .note{font-size:15px;color:var(--mut);border-left:2px solid var(--line);padding-left:16px;margin:22px 0}
+  .terminal{background:#0a0d10;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:14px;margin:26px 0;overflow:hidden}
+  .tbar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#0c1013}
+  .tbar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .tbody{padding:18px 18px 20px;color:#b9c2c9;white-space:pre-wrap;line-height:1.7}
+  .tbody .c{color:#5f6b74}.tbody .g{color:var(--jade)}.tbody .r{color:var(--red)}.tbody .y{color:var(--gold)}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;margin:30px 0;text-align:center}
+  @media(max-width:640px){.flow{grid-template-columns:1fr}.flow .arrow{transform:rotate(90deg)}}
+  .node{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px 12px}
+  .node b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);margin-bottom:6px}
+  .node span{font-size:13px;color:var(--mut);font-family:var(--serif)}
+  .node.bad{border-color:#3a2320;background:#140d0c}.node.bad b{color:var(--red)}
+  .arrow{color:var(--mut);font-family:var(--mono);padding:0 8px;font-size:20px}
+  .rules{display:grid;gap:14px;margin-top:26px}
+  .rule{display:grid;grid-template-columns:44px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:linear-gradient(180deg,#0d1114,#0a0d10)}
+  .rule .n{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+  .rule h3{font-size:19px;font-weight:400;margin-bottom:5px}
+  .rule p{font-size:15px;margin:0;color:var(--mut)}
+  .standdown{text-align:center;padding:80px 0}
+  .standdown p{font-size:clamp(20px,3vw,27px);color:var(--ink);font-family:var(--serif);max-width:720px;margin:0 auto 10px}
+  .sig{font-family:var(--mono);font-size:12.5px;color:var(--mut);letter-spacing:.05em;margin-top:26px}
+  footer{padding:40px 0 70px;color:#5c656d;font-size:13px;font-family:var(--mono)}
+  footer a{color:#7c8894}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:100px;padding:4px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase}
+
+  /* trainer-specific */
+  .puzzle{border:1px solid var(--line);border-radius:14px;padding:26px;margin:30px 0;background:linear-gradient(180deg,#0d1114,#0a0d10)}
+  .puzzle-title{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--jade);margin-bottom:16px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px;border:1px solid var(--line);color:var(--mut)}
+  .tag.deadlock{border-color:#3a2320;color:var(--red)}
+  .qtext{font-size:15.5px;color:var(--mut);margin:16px 0 14px}
+  .options{display:grid;gap:10px;margin-bottom:6px}
+  .option{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:12px 16px;font-family:var(--mono);font-size:14.5px;cursor:pointer;transition:border-color .15s,background .15s}
+  .option:hover:not(:disabled){border-color:var(--gold)}
+  .option:disabled{cursor:default}
+  .option.correct{border-color:var(--jade);background:#0e1614;color:var(--jade)}
+  .option.incorrect{border-color:var(--red);background:#140d0c;color:#e08b86}
+  .feedback{font-family:var(--mono);font-size:13px;margin-top:10px;min-height:16px}
+  .feedback.correct{color:var(--jade)}
+  .feedback.incorrect{color:var(--red)}
+  .reveal{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line);font-size:15px;color:var(--mut);display:none}
+  .reveal.show{display:block}
+  .reveal .chain{font-family:var(--mono);font-size:14px;color:var(--gold);margin-bottom:10px}
+  .reveal .verdict{font-family:var(--mono);font-size:12.5px;margin-top:12px;color:var(--mut)}
+  .reveal .verdict.deadlock{color:var(--red)}
+  .reveal .verdict.clean{color:var(--jade)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow">GCD ordering, mechanically · 2026</div>
+    <h1>What does this <em>print</em>?</h1>
+    <p class="lede">iOS interview concurrency puzzles aren't really puzzles — they're a mechanical procedure wearing a costume. Four rules, one method: build a chain from print to print, or admit there isn't one.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§1 · the method</div>
+    <h2>Don't guess the order. <em>Build the chain.</em></h2>
+    <p>Every "what prints first" GCD question is really asking one thing: can you connect two print statements with an arrow that some rule <em>forces</em> to exist? If you can draw an unbroken chain from the first print to the last using only the rules below, that chain is the answer. If two prints have no rule linking them — no shared serial queue, no <span class="m">sync</span>, no group dependency — the honest answer is "either could come first." Guessing a specific order there is the single most common way this question gets missed.</p>
+    <div class="flow">
+      <div class="node"><b>PRINT A</b><span>starts the trace</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>PRINT B</b><span>a rule forces A before B — chain exists</span></div>
+      <div class="arrow">⇢</div>
+      <div class="node"><b>PRINT C</b><span>no rule links them — either order is valid</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§2 · the four rules</div>
+    <h2>Memorize four rules. <em>Not four hundred examples.</em></h2>
+    <p>Almost every ordering guarantee in a GCD snippet reduces to one of these. Learn what each one does and does not promise, and the "trick" puzzles stop being tricks.</p>
+    <div class="rules">
+      <div class="rule"><div class="n">I</div><div><h3>A block runs top to bottom.</h3><p>Inside any single closure, statements execute in the order they're written — same as a normal function body. The puzzle doesn't start until a second block enters the picture.</p></div></div>
+      <div class="rule"><div class="n">II</div><div><h3>Async schedules and moves on.</h3><p>Dispatching a block with <span class="m">.async</span> doesn't wait for anything — it queues the block for later and immediately falls through to the next line at the call site. Code written after the dispatch call runs before that block's body starts.</p></div></div>
+      <div class="rule"><div class="n">III</div><div><h3>Serial means one at a time, in order.</h3><p>A serial queue — or a barrier block on a concurrent queue — finishes the block it's running before starting the next one, strictly in the order blocks arrived. Main-thread UI code is just another block on the serial main queue, which is why it obeys this same rule.</p></div></div>
+      <div class="rule"><div class="n">IV</div><div><h3>Sync and wait() block the caller.</h3><p><span class="m">sync</span>, <span class="m">DispatchGroup.wait()</span>, and <span class="m">semaphore.wait()</span> all freeze the calling thread until the awaited work finishes. <span class="m">group.notify(queue:)</span> is not in this family — it hands off a block to run later and blocks nothing, which is exactly why it's easy to misread.</p></div></div>
+    </div>
+    <p style="margin-top:34px">Three checks to run before you trust any chain you've built:</p>
+    <div class="rules">
+      <div class="rule"><div class="n">A</div><div><h3>Deadlock check first.</h3><p>Before tracing prints, ask: does a <span class="m">sync</span> call target the serial queue that's already running? Or do two queues <span class="m">sync</span>-wait on each other? Either one means the answer is "deadlock," not an order.</p></div></div>
+      <div class="rule"><div class="n">B</div><div><h3>QoS is priority, not order.</h3><p><span class="m">.userInitiated</span> versus <span class="m">.background</span> changes how eagerly the system schedules a block — it is not a guarantee about which of two independent blocks prints first.</p></div></div>
+      <div class="rule"><div class="n">C</div><div><h3>Concurrent ≠ parallel print order.</h3><p>A concurrent queue starts blocks in arrival order, but running in parallel says nothing about which one finishes — or prints — first. No chain between two blocks means the order is genuinely unconstrained.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom:none">
+  <div class="wrap">
+    <div class="kicker">§3 · practice</div>
+    <h2>Eight snippets. <em>Trace them yourself.</em></h2>
+    <p>Read the code, decide what's guaranteed — if anything — then check your answer. Every reveal walks the chain rule by rule.</p>
+    <div id="puzzles"></div>
+  </div>
+</section>
+
+<div class="wrap" style="padding:0 24px 20px">
+  <div class="note">This trainer covers <strong>GCD only</strong> — <span class="m">DispatchQueue</span>, sync/async, groups, barriers, semaphores. Swift Concurrency (<span class="m">async</span>/<span class="m">await</span>, actors, <span class="m">Task</span>, structured suspension instead of blocking calls) is a related but genuinely different rule set. That's a companion page for another day.</div>
+</div>
+
+<footer class="wrap">
+  ✦ the method and rule framing here are inspired by Lev Litvak's <a href="https://www.linkedin.com/pulse/grokking-ios-interview-concurrency-puzzles-lev-litvak-fture/">"Grokking iOS Interview Concurrency Puzzles"</a> — the puzzles, code, and wording on this page are original, not reproduced from that piece.<br><br>
+  No accounts, no tracking, no backend — every check above runs in your browser.
+</footer>
+
+<script>
+(function(){
+  var puzzles = [
+    {
+      title: "The Async Fallthrough",
+      deadlock: false,
+      code: 'let queue = DispatchQueue(label: "worker")\n\nprint("1")\nqueue.async {\n    print("2")\n}\nprint("3")',
+      question: "What is the guaranteed print order?",
+      options: ["1, 2, 3", "1, 3, 2", "2, 1, 3", "Any order — unconstrained"],
+      correct: 1,
+      chain: '1 → 3 → 2',
+      explanation: 'print("1") runs first — Rule I, top of the block. queue.async schedules print("2") for later and returns immediately — Rule II — so print("3"), the next line at the call site, runs next. print("2") only happens once the worker queue gets around to it, so it prints last.'
+    },
+    {
+      title: "Serial Queue, Three Jobs",
+      deadlock: false,
+      code: 'let serial = DispatchQueue(label: "serial")\n\nserial.async { print("A") }\nserial.async { print("B") }\nserial.async { print("C") }',
+      question: "What is the guaranteed print order?",
+      options: ["A, B, C", "Any order — unconstrained", "C, B, A", "A and B any order, then C"],
+      correct: 0,
+      chain: 'A → B → C',
+      explanation: 'All three are async dispatches onto the same serial queue. Rule II says the calling code doesn’t wait for any of them — it races ahead immediately after each submission. But Rule III governs the blocks themselves: a serial queue runs one at a time, strictly in arrival order. So even though the caller finishes submitting all three instantly, the queue still guarantees A → B → C.'
+    },
+    {
+      title: "Two Jobs, One Concurrent Queue",
+      deadlock: false,
+      code: 'let pool = DispatchQueue(label: "pool", attributes: .concurrent)\n\npool.async { print("X") }\npool.async { print("Y") }',
+      question: "What is the guaranteed print order?",
+      options: ["X, Y", "Y, X", "Any order — unconstrained", "X and Y print simultaneously, always"],
+      correct: 2,
+      chain: 'X ⇢ Y (no chain)',
+      explanation: 'Both blocks are submitted to a concurrent queue, so Rule III’s one-at-a-time guarantee doesn’t apply — the queue is free to run X and Y on separate threads. X was started before Y (arrival order), but Check C reminds us that says nothing about which one finishes or prints first. No rule links these two prints, so either order is valid.'
+    },
+    {
+      title: "The Same-Queue Trap",
+      deadlock: true,
+      code: 'let queue = DispatchQueue(label: "main-ish")\n\nqueue.async {\n    print("start")\n    queue.sync {\n        print("never happens")\n    }\n    print("end")\n}',
+      question: "What actually happens when this runs?",
+      options: ["start, never happens, end", "start, end", "Deadlock — nothing after “start” ever prints", "never happens, start, end"],
+      correct: 2,
+      chain: 'start → (deadlock)',
+      explanation: 'Check A first: does a sync call target the queue that’s already running? Yes — the outer block is executing on queue, and inside it, queue.sync asks that same serial queue to run another block and waits for it (Rule IV). But queue is busy running the outer block and can’t free up to run the inner one — it’s serial. The sync call waits forever for a slot that will never open. "start" prints, then everything hangs.'
+    },
+    {
+      title: "The notify() Trap",
+      deadlock: false,
+      code: 'let group = DispatchGroup()\nlet queue = DispatchQueue.global()\n\ngroup.enter()\nqueue.async {\n    print("task")\n    group.leave()\n}\n\ngroup.notify(queue: queue) {\n    print("done")\n}\nprint("after notify")',
+      question: "Which statement is guaranteed true?",
+      options: [
+        "“done” can print before “task”",
+        "“after notify” always prints before “task”",
+        "“task” always happens before “done”, but “after notify” could land before, after, or in between",
+        "group.notify blocks execution, so “after notify” always prints last"
+      ],
+      correct: 2,
+      chain: 'task → done · "after notify" has no chain to either',
+      explanation: 'Unlike Rule IV’s wait(), group.notify(queue:) doesn’t block anything — it hands off a block to run once the group’s count returns to zero, then lets the caller keep going immediately (the same non-blocking spirit as Rule II). So "after notify" runs right after the notify call with no ordering relationship to "task". "done" is different: it can only fire after group.leave() has been called, which only happens once "task" has printed — so task → done is a real chain. Option D is the trap: it reads notify like a synchronous checkpoint, which is exactly what it isn’t.'
+    },
+    {
+      title: "Barrier on a Concurrent Queue",
+      deadlock: false,
+      code: 'let pool = DispatchQueue(label: "pool", attributes: .concurrent)\n\npool.async { print("read A") }\npool.async { print("read B") }\npool.async(flags: .barrier) { print("WRITE") }\npool.async { print("read C") }',
+      question: "Which statement is guaranteed true?",
+      options: [
+        "All four always print in submission order",
+        "WRITE always prints after both reads finish, and read C always prints after WRITE — but read A and read B can land in either order",
+        "The barrier has no effect on ordering here",
+        "read C can print before WRITE"
+      ],
+      correct: 1,
+      chain: 'read A ⇢ read B (no chain) · both → WRITE → read C',
+      explanation: 'A barrier block extends Rule III onto a concurrent queue at one specific point: everything submitted before the barrier must finish before the barrier block starts, and nothing submitted after the barrier starts until the barrier block finishes. So WRITE is chained after both reads, and read C is chained after WRITE. But read A and read B themselves are two ordinary concurrent jobs with no rule linking them to each other — Check C applies, and either can print first.'
+    },
+    {
+      title: "Sync Across Different Queues",
+      deadlock: false,
+      code: 'let queueA = DispatchQueue(label: "A")\nlet queueB = DispatchQueue(label: "B")\n\nprint("1")\nqueueA.sync {\n    print("2")\n    queueB.sync {\n        print("3")\n    }\n}\nprint("4")',
+      question: "What is the guaranteed print order?",
+      options: ["Deadlock — nothing after “1” prints", "1, 2, 3, 4", "1, 4, 2, 3", "1, 2, 4, 3"],
+      correct: 1,
+      chain: '1 → 2 → 3 → 4',
+      explanation: 'Check A first, same as always: does the inner sync target the queue that’s already running? No — queueA.sync runs on queueA, and inside that block, queueB.sync targets a completely different queue. Nothing here waits on itself, so it’s safe. With deadlock ruled out, Rule IV says each sync call blocks its caller until the block finishes, which chains every line: 1 → 2 → 3 → 4, no gaps.'
+    },
+    {
+      title: "Two Priorities, No Relationship",
+      deadlock: false,
+      code: 'DispatchQueue.global(qos: .background).async {\n    print("low")\n}\nDispatchQueue.global(qos: .userInitiated).async {\n    print("high")\n}',
+      question: "What is the guaranteed print order?",
+      options: [
+        "“high” always prints before “low”, because of QoS",
+        "“low” always prints before “high”, because it was submitted first",
+        "Any order — QoS affects scheduling priority, not a print-order guarantee",
+        "Deadlock"
+      ],
+      correct: 2,
+      chain: 'low ⇢ high (no chain)',
+      explanation: 'Check B: QoS classes tell the system how eagerly to schedule a block relative to other work on the system — they are a hint about urgency, not a promise about relative order. These are two independent dispatches with no rule connecting them, so either can print first regardless of which QoS looks "higher."'
+    }
+  ];
+
+  var container = document.getElementById('puzzles');
+
+  puzzles.forEach(function(p, i){
+    var el = document.createElement('div');
+    el.className = 'puzzle';
+
+    var titleHtml = 'Puzzle ' + (i + 1) + ' of ' + puzzles.length + ' — ' + p.title;
+    if (p.deadlock) titleHtml += ' <span class="tag deadlock">deadlock risk</span>';
+
+    var optionsHtml = p.options.map(function(opt, idx){
+      return '<button class="option" type="button" data-idx="' + idx + '">' + opt + '</button>';
+    }).join('');
+
+    el.innerHTML =
+      '<div class="puzzle-title">' + titleHtml + '</div>' +
+      '<div class="terminal">' +
+        '<div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>' +
+        '<div class="tbody"></div>' +
+      '</div>' +
+      '<p class="qtext">' + p.question + '</p>' +
+      '<div class="options">' + optionsHtml + '</div>' +
+      '<div class="feedback"></div>' +
+      '<div class="reveal">' +
+        '<div class="chain">' + p.chain + '</div>' +
+        '<p>' + p.explanation + '</p>' +
+        '<div class="verdict ' + (p.deadlock ? 'deadlock' : 'clean') + '">Deadlock: ' + (p.deadlock ? 'yes' : 'no') + '</div>' +
+      '</div>';
+
+    el.querySelector('.tbody').textContent = p.code;
+
+    var feedback = el.querySelector('.feedback');
+    var reveal = el.querySelector('.reveal');
+    var buttons = el.querySelectorAll('.option');
+
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var chosen = parseInt(btn.getAttribute('data-idx'), 10);
+        var isCorrect = chosen === p.correct;
+
+        buttons.forEach(function(b){ b.disabled = true; });
+        buttons[p.correct].classList.add('correct');
+        if (!isCorrect) btn.classList.add('incorrect');
+
+        feedback.textContent = isCorrect ? '✓ correct' : '✗ not quite — correct answer highlighted above';
+        feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+
+        reveal.classList.add('show');
+      });
+    });
+
+    container.appendChild(el);
+  });
+})();
+</script>
+
+</body>
+</html>
