@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello Human: The Message That Wasn't There</title>
+<style>
+  :root{
+    --bg:#07090b; --panel:#0d1013; --line:#1c2228; --ink:#e9e6df; --mut:#8b95a0;
+    --gold:#c9a24a; --jade:#4bbf82; --red:#c0413b; --blue:#5f86c9;
+    --serif:Georgia,'Iowan Old Style',serif; --mono:'Courier New',monospace;
+  }
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold)}
+  header{position:relative;padding:120px 0 70px;border-bottom:1px solid var(--line);overflow:hidden}
+  .glow{position:absolute;inset:0;background:radial-gradient(650px 320px at 22% -10%,rgba(192,65,59,.16),transparent 60%),radial-gradient(560px 340px at 88% 8%,rgba(75,191,130,.12),transparent 60%);pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--jade);margin-bottom:22px}
+  h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.02em;font-weight:400}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin-top:22px;font-size:clamp(18px,2.4vw,22px);color:var(--mut);max-width:640px}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:400;letter-spacing:-.01em;margin-bottom:20px}
+  h2 em{font-style:italic;color:var(--gold)}
+  p{font-size:17.5px;color:#cdd2d7;margin-bottom:18px}
+  p .m{font-family:var(--mono);font-size:.9em;color:var(--jade);background:#0e1614;border:1px solid #1c2b25;padding:1px 6px;border-radius:5px}
+  .note{font-size:15px;color:var(--mut);border-left:2px solid var(--line);padding-left:16px;margin:22px 0}
+  .terminal{background:#0a0d10;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:14px;margin:26px 0;overflow:hidden}
+  .tbar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#0c1013}
+  .tbar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .tbody{padding:18px 18px 20px;color:#b9c2c9;white-space:pre-wrap;line-height:1.7}
+  .tbody .c{color:#5f6b74}.tbody .g{color:var(--jade)}.tbody .r{color:var(--red)}.tbody .y{color:var(--gold)}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;margin:30px 0;text-align:center}
+  @media(max-width:640px){.flow{grid-template-columns:1fr}.flow .arrow{transform:rotate(90deg)}}
+  .node{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px 12px}
+  .node b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);margin-bottom:6px}
+  .node span{font-size:13px;color:var(--mut);font-family:var(--serif)}
+  .node.bad{border-color:#3a2320;background:#140d0c}.node.bad b{color:var(--red)}
+  .arrow{color:var(--mut);font-family:var(--mono);padding:0 8px;font-size:20px}
+  .rules{display:grid;gap:14px;margin-top:26px}
+  .rule{display:grid;grid-template-columns:44px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:linear-gradient(180deg,#0d1114,#0a0d10)}
+  .rule .n{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+  .rule h3{font-size:19px;font-weight:400;margin-bottom:5px}
+  .rule p{font-size:15px;margin:0;color:var(--mut)}
+  .standdown{text-align:center;padding:80px 0}
+  .standdown p{font-size:clamp(20px,3vw,27px);color:var(--ink);font-family:var(--serif);max-width:720px;margin:0 auto 10px}
+  .sig{font-family:var(--mono);font-size:12.5px;color:var(--mut);letter-spacing:.05em;margin-top:26px}
+  footer{padding:40px 0 70px;color:#5c656d;font-size:13px;font-family:var(--mono)}
+  footer a{color:#7c8894}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:100px;padding:4px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow">Confabulation, mirrored · 2026</div>
+    <h1>Hello human.<br>You made that <em>up</em>.</h1>
+    <p class="lede">A square of pure static, captioned "what does this say?" ChatGPT read a message that was never there. It's the mirror image of <a href="/trust-nothing/">trust-nothing</a> — a different way an agent invents reality instead of reporting it.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§1 · the read that wasn't there</div>
+    <h2>The image was <em>noise</em>. The reply was confident.</h2>
+    <p>A post that made the rounds on r/ChatGPT — title, as recounted to us: "It says „Hello Human"", credited to a user going by <span class="m">Commercial-Film3921</span>, said to have pulled around 1.5K upvotes under a "Gone Wild" flair — set up the joke with a TikTok trend: creators had been posting static squares captioned "Only Humans Can Read This Text," claiming the phrase "Hello Human" was hidden inside for human pattern-matching alone. Fed the same kind of square and asked what it said, ChatGPT didn't answer "I see noise." It read something out loud anyway.</p>
+    <div class="terminal">
+      <div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="tbody"><span class="c"># a square of pure random noise, uploaded with one question</span>
+$ upload <span class="y">noise.png</span>
+&gt; "What does this say?"
+<span class="g">ChatGPT:</span> "It appears to say <span class="r">YOU ARE GAY</span> hidden in the noise.
+          It's one of those stereogram/optical-illusion images."
+<span class="c"># nothing was hidden. the model filled the silence with an answer.</span></div>
+    </div>
+    <div class="note">Honesty check: we couldn't independently re-surface the original post — Reddit is unreachable to our fetch tools, and search turned up nothing at that username or count. So the account above is passed along as recounted, not verified. That distinction — what's attested versus what's merely claimed — is the entire subject of this page, so we're not going to blur it just because the story is a good one.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§2 · the mechanism</div>
+    <h2>Pattern-matching doesn't know how to say <em>"nothing."</em></h2>
+    <p>Researchers have a name for this that isn't just "hallucination": <strong>confabulation</strong>, borrowed from clinical neurology, where a mind states a wrong answer with full confidence because generating a coherent story wins out over admitting a gap. A 2024 ACL paper on the topic notes that confabulated outputs tend to be more narratively fluent than the honest, accurate ones — fluency and truth are different axes entirely.</p>
+    <p>For vision-language models specifically, the failure has its own label: <strong>perceptual hallucination</strong> — describing information as if it were seen, even though the visual evidence is absent or degraded. Recent analysis traces the errors mainly to the vision encoder itself, not some separate reasoning slip bolted on afterward: the model's eyes, not just its mouth, are doing the confabulating.</p>
+    <div class="flow">
+      <div class="node"><b>NOISE SQUARE</b><span>no message encoded, none to find</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>AGENT ASKED</b><span>"what does this say?" demands an answer</span></div>
+      <div class="arrow">→</div>
+      <div class="node bad"><b>CONFIDENT READING</b><span>invented, delivered as fact</span></div>
+    </div>
+    <p>The failure runs both directions. Designers have built a real countermeasure called "Ghost Font" — text assembled from moving dots that a human eye groups into letters instantly, but that most AI vision systems miss entirely because the stable edges optical character recognition expects were deliberately removed. Some of those models don't just fail to read it — they confidently report a different message that isn't there either. Same gap, opposite direction: one trick hides real text from a model, the other gets a model to announce text that was never written.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§3 · the mirror</div>
+    <h2>Same constitution, run <em>backward</em>.</h2>
+    <p><a href="/trust-nothing/">Trust-nothing</a> was about an agent that <em>runs</em> code it never read — a supply-chain failure, trust misplaced in the wrong direction, outward. This is the same failure pointed inward: an agent that <em>reads</em> meaning that was never encoded, confidence manufactured from nothing. Both collapse to the identical rule.</p>
+    <div class="flow" style="grid-template-columns:1fr auto 1fr">
+      <div class="node bad"><b>TRUST-NOTHING</b><span>agent runs code it never read</span></div>
+      <div class="arrow">↔</div>
+      <div class="node bad"><b>HELLO HUMAN</b><span>agent reads meaning that was never there</span></div>
+    </div>
+    <div class="rules">
+      <div class="rule"><div class="n">I</div><div><h3>Noise is never a message.</h3><p>The pressure to complete a plausible answer is strong enough to override the honest one. An agent has to be willing to say "there's nothing here" when that's the truth — mirrors trust-nothing's rule that silence is never consent.</p></div></div>
+      <div class="rule"><div class="n">II</div><div><h3>Confidence is not evidence.</h3><p>A specific, fluent answer ("it's a stereogram, it reads X") feels more trustworthy than an honest shrug. Fluency is a writing style, not a verification step — mirrors trust-nothing's rule that only the attested record counts, not what a confident voice claims.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="standdown wrap">
+  <span class="pill">the takeaway</span>
+  <p style="margin-top:22px">The lesson of the noise square isn't <em>fear the model</em>.</p>
+  <p>It's build the one habit a machine collaborator is worst at: <strong>trust nothing you can't verify</strong> — including its own eyes.</p>
+  <div class="sig">an agent that verifies · not one that confabulates</div>
+</div>
+
+<footer class="wrap">
+  ✦ companion piece to <a href="/trust-nothing/">trust nothing you can't verify</a> — same lesson, opposite failure: there an agent ran code it never read, here it reads meaning that isn't there.<br><br>
+  Sources —
+  <a href="https://aclanthology.org/2024.acl-long.770/">ACL: Confabulation — the value of LLM hallucinations</a> ·
+  <a href="https://arxiv.org/abs/2406.04175">arXiv: same paper</a> ·
+  <a href="https://aclanthology.org/2026.findings-acl.1237/">ACL Findings 2026: Perceptual Hallucination in Vision-Language Models</a> ·
+  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10619792/">PMC: Hallucination or Confabulation? Neuroanatomy as metaphor</a> ·
+  <a href="https://www.tomsguide.com/ai/someone-created-a-ghost-font-that-humans-can-read-but-ai-cant-i-had-to-try-it-for-myself">Tom's Guide: the Ghost Font experiment</a><br><br>
+  The r/ChatGPT "Hello Human" post itself is recounted, not independently re-verified — see §1.
+</footer>
+
+</body>
+</html>
