@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yakiv Kovalskyi</title>
+<meta name="description" content="Yakiv Kovalskyi builds native iOS apps in Swift — a chess engine with realtime multiplayer, an on-device AI demo, a consent-first horror game, and open-source AI-agent tooling.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://testtest126.github.io/">
+<meta property="og:title" content="Yakiv Kovalskyi — iOS · Swift · AI-native">
+<meta property="og:description" content="Native iOS apps in Swift — a chess engine with realtime multiplayer, an on-device AI demo, a consent-first horror game, and open-source AI-agent tooling.">
+<meta property="og:image" content="https://testtest126.github.io/assets/chess-game.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0c'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='26' font-weight='700' fill='%23c9a24a' text-anchor='middle'%3EYK%3C/text%3E%3C/svg%3E">
 <style>
   :root{
     --bg:#0a0a0c;
@@ -26,6 +33,8 @@
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .card-link:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
   .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
   header.hero{
     position:relative;
@@ -57,7 +66,7 @@
     background:linear-gradient(90deg,#fff, #c9a24a 70%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .lede{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:620px}
+  .lede{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:580px}
   .cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
   .btn{
     display:inline-flex;align-items:center;gap:9px;
@@ -74,18 +83,17 @@
   .sec-head span{color:var(--muted);font-size:14px}
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
   @media(max-width:720px){.grid{grid-template-columns:1fr}}
-  .card.wide{grid-column:1 / -1;flex-direction:row;gap:26px;align-items:stretch}
+  .card.wide{grid-column:1 / -1}
+  .card.wide .card-link{flex-direction:row;gap:26px;align-items:stretch}
   .card.wide .device-frame{width:280px;margin-bottom:0;flex-shrink:0;align-self:flex-start}
   .card.wide .body{display:flex;flex-direction:column;flex:1}
-  @media(max-width:720px){.card.wide{flex-direction:column}.card.wide .device-frame{width:100%}}
+  @media(max-width:720px){.card.wide .card-link{flex-direction:column}.card.wide .device-frame{width:100%}}
   .pill.new{background:rgba(155,123,216,.18);color:#c3aef0}
   .card{
     position:relative;
     background:linear-gradient(180deg,var(--panel-2),var(--panel));
     border:1px solid var(--line);
     border-radius:var(--radius);
-    padding:26px 26px 22px;
-    display:flex;flex-direction:column;
     transition:.2s ease;
     overflow:hidden;
   }
@@ -94,7 +102,17 @@
     content:"";position:absolute;left:0;top:0;height:3px;width:100%;
     background:var(--bar,linear-gradient(90deg,var(--accent),transparent));
     opacity:.9;
+    z-index:1;
   }
+  .card-link{
+    position:relative;
+    display:flex;flex-direction:column;
+    height:100%;
+    padding:26px 26px 22px;
+    color:inherit;text-decoration:none;
+  }
+  .card.split{display:flex;flex-direction:column;height:100%;padding:26px 26px 22px}
+  .card.split .card-link{padding:0;flex:1;height:auto}
   .device-frame{
     --frame-h:236px;
     height:var(--frame-h);margin-bottom:18px;border-radius:16px;
@@ -107,6 +125,7 @@
   }
   .device-frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;}
   .device-frame.browser{
+    --frame-h:280px;
     display:flex;flex-direction:column;background:#0d0d10;
   }
   .device-frame.browser img{flex:1 1 auto;min-height:0;width:100%;object-fit:cover;object-position:top center;}
@@ -114,6 +133,7 @@
     flex:0 0 auto;
     display:flex;align-items:center;gap:6px;padding:9px 13px;
     background:#16161c;border-bottom:1px solid var(--line);
+    text-decoration:none;color:inherit;
   }
   .device-frame.browser .chrome .dot{width:8px;height:8px;border-radius:50%;background:#34343d}
   .device-frame.browser .chrome .dot:nth-child(1){background:#4a4a54}
@@ -121,7 +141,9 @@
     margin-left:8px;flex:1;font-size:11px;color:var(--muted);
     background:#0a0a0c;border:1px solid var(--line);border-radius:7px;
     padding:3px 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    transition:color .15s ease,border-color .15s ease;
   }
+  a.chrome:hover .url{color:var(--accent);border-color:rgba(201,162,74,.4)}
   .card h3{font-size:19px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px}
   .pill{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;letter-spacing:.03em}
   .pill.pub{background:rgba(109,139,208,.16);color:#a9bef0}
@@ -129,11 +151,11 @@
   .card p{color:var(--muted);font-size:14.5px;flex:1}
   .tags{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 14px}
   .tag{font-size:11.5px;color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:7px}
-  .card a.view{
-    text-decoration:none;color:var(--txt);font-size:13.5px;font-weight:600;
+  .card .view{
+    color:var(--txt);font-size:13.5px;font-weight:600;
     display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
   }
-  .card a.view:hover{color:var(--accent)}
+  .card-link:hover .view{color:var(--accent)}
   footer{border-top:1px solid var(--line);padding:44px 0 60px;margin-top:50px}
   .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
   .foot a{color:var(--muted);text-decoration:none}
@@ -164,53 +186,65 @@
   <div class="grid">
 
     <div class="card" style="--bar:linear-gradient(90deg,#c9a24a,transparent)">
-      <div class="device-frame phone"><img src="assets/chess-game.jpg" width="750" height="1337" style="object-position:center 40%" alt="MateMate mid-game board, dark blue theme, with move history" loading="lazy"></div>
-      <h3>MateMate <span class="pill pub">chess</span></h3>
-      <div class="role">iOS chess app · Swift + Vapor</div>
-      <p>A full chess app with a built-in engine, realtime online multiplayer over a Vapor backend, and post-game analysis. Server-authoritative game integrity, warm-classic UI.</p>
-      <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">Vapor</span><span class="tag">WebSockets</span></div>
-      <a class="view" href="https://github.com/testtest126/chess" target="_blank">View on GitHub →</a>
+      <a class="card-link" href="https://github.com/testtest126/chess" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="assets/chess-game.jpg" width="750" height="1337" style="object-position:center 40%" alt="MateMate mid-game board, dark blue theme, with move history" loading="lazy"></div>
+        <h3>MateMate <span class="pill pub">chess</span></h3>
+        <div class="role">iOS chess app · Swift + Vapor</div>
+        <p>A full chess app with a built-in engine, realtime online multiplayer over a Vapor backend, and post-game analysis. Server-authoritative game integrity, warm-classic UI.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">Vapor</span><span class="tag">WebSockets</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
     </div>
 
     <div class="card" style="--bar:linear-gradient(90deg,#b5495b,transparent)">
-      <div class="device-frame phone"><img src="assets/lull-eye.jpg" width="750" height="1090" alt="LULL consent screen — a sleep aid, let it watch or not tonight" loading="lazy"></div>
-      <h3>LULL <span class="pill pub">horror</span></h3>
-      <div class="role">Psychological horror game · consent-first</div>
-      <p>An OD-inspired horror game for iPhone that turns the device's own intimacy against the player. Forbidden sensors can't even be named in code — the safety rule is enforced by the type system.</p>
-      <div class="tags"><span class="tag">Swift</span><span class="tag">AVFoundation</span><span class="tag">MIT</span></div>
-      <a class="view" href="https://github.com/testtest126/LULL" target="_blank">View on GitHub →</a>
+      <a class="card-link" href="https://github.com/testtest126/LULL" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="assets/lull-eye.jpg" width="750" height="1090" style="object-position:center 100%" alt="LULL consent screen — a sleep aid, let it watch or not tonight" loading="lazy"></div>
+        <h3>LULL <span class="pill pub">horror</span></h3>
+        <div class="role">Psychological horror game · consent-first</div>
+        <p>An OD-inspired horror game for iPhone that turns the device's own intimacy against the player. Forbidden sensors can't even be named in code — the safety rule is enforced by the type system.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">AVFoundation</span><span class="tag">MIT</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
     </div>
 
     <div class="card" style="--bar:linear-gradient(90deg,#6d8bd0,transparent)">
-      <div class="device-frame phone"><img src="assets/ai-demo-parser.jpg" width="750" height="417" style="object-position:left top" alt="ai-demo Argument Parser tab — a filled command parsed into structured task, detail, and review fields" loading="lazy"></div>
-      <h3>ai-demo <span class="pill pub">on-device AI</span></h3>
-      <div class="role">Apple FoundationModels · SwiftUI</div>
-      <p>A focused demo of Apple's on-device FoundationModels framework — local language-model inference in SwiftUI with SwiftData, graceful availability handling, zero network calls.</p>
-      <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">FoundationModels</span></div>
-      <a class="view" href="https://github.com/testtest126/ai-demo" target="_blank">View on GitHub →</a>
+      <a class="card-link" href="https://github.com/testtest126/ai-demo" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="assets/ai-demo-parser.jpg" width="750" height="417" style="object-position:left top" alt="ai-demo Argument Parser tab — a filled command parsed into structured task, detail, and review fields" loading="lazy"></div>
+        <h3>ai-demo <span class="pill pub">on-device AI</span></h3>
+        <div class="role">Apple FoundationModels · SwiftUI</div>
+        <p>A focused demo of Apple's on-device FoundationModels framework — local language-model inference in SwiftUI with SwiftData, graceful availability handling, zero network calls.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">FoundationModels</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
     </div>
 
-    <div class="card" style="--bar:linear-gradient(90deg,#8ad0a9,transparent)">
+    <div class="card split" style="--bar:linear-gradient(90deg,#8ad0a9,transparent)">
       <div class="device-frame browser">
-        <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">testtest126.github.io/agent-ready</span></div>
-        <img src="assets/agent-ready-arch.jpg" width="900" height="608" alt="agent-ready architecture docs — Single source of truth, thin adapters, with a diagram of AGENTS.md feeding CLAUDE.md, copilot-instructions, and .cursor/rules" loading="lazy">
+        <a class="chrome" href="https://testtest126.github.io/agent-ready/" target="_blank" rel="noopener" aria-label="Open agent-ready live demo"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">testtest126.github.io/agent-ready ↗</span></a>
+        <a href="https://github.com/testtest126/agent-ready" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="assets/agent-ready-arch.jpg" width="900" height="608" alt="agent-ready architecture docs — Single source of truth, thin adapters, with a diagram of AGENTS.md feeding CLAUDE.md, copilot-instructions, and .cursor/rules" loading="lazy">
+        </a>
       </div>
-      <h3>agent-ready <span class="pill pub">tooling</span></h3>
-      <div class="role">Conventions for AI collaboration</div>
-      <p>Context-free, pluggable conventions that make any repository ready for AI collaboration: one AGENTS.md, tool adapters for Claude Code / Copilot / Cursor, and a memory scaffold.</p>
-      <div class="tags"><span class="tag">Shell</span><span class="tag">AGENTS.md</span><span class="tag">DX</span><span class="tag">MIT</span></div>
-      <a class="view" href="https://github.com/testtest126/agent-ready" target="_blank">View on GitHub →</a>
+      <a class="card-link" href="https://github.com/testtest126/agent-ready" target="_blank" rel="noopener">
+        <h3>agent-ready <span class="pill pub">tooling</span></h3>
+        <div class="role">Conventions for AI collaboration</div>
+        <p>Context-free, pluggable conventions that make any repository ready for AI collaboration: one AGENTS.md, tool adapters for Claude Code / Copilot / Cursor, and a memory scaffold.</p>
+        <div class="tags"><span class="tag">Shell</span><span class="tag">AGENTS.md</span><span class="tag">DX</span><span class="tag">MIT</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
     </div>
 
     <div class="card wide" style="--bar:linear-gradient(90deg,#9b7bd8,transparent)">
-      <div class="device-frame phone"><img src="assets/poker-preflop.jpg" width="750" height="632" alt="Poker Study Preflop Range Viewer — BTN position selected, 13×13 hand grid lit up in dark mode" loading="lazy"></div>
-      <div class="body">
-        <h3>poker <span class="pill new">newest</span></h3>
-        <div class="role">Personalized NLHE tournament study helper</div>
-        <p>A study &amp; prep companion for No-Limit Hold'em tournaments, personalized to each player's own tendencies and leaks: preflop ranges, an ICM / push-fold trainer, a bankroll tracker, hand-history import with leak-finding, and targeted drills. On-device and privacy-first — built for study away from the table, not real-time play.</p>
-        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">On-device</span><span class="tag">ICM</span><span class="tag">MIT</span></div>
-        <a class="view" href="https://github.com/testtest126/poker" target="_blank">View on GitHub →</a>
-      </div>
+      <a class="card-link" href="https://github.com/testtest126/poker" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="assets/poker-preflop.jpg" width="750" height="632" alt="Poker Study Preflop Range Viewer — BTN position selected, 13×13 hand grid lit up in dark mode" loading="lazy"></div>
+        <div class="body">
+          <h3>poker <span class="pill new">newest</span></h3>
+          <div class="role">Personalized NLHE tournament study helper</div>
+          <p>A study &amp; prep companion for No-Limit Hold'em tournaments, personalized to each player's own tendencies and leaks: preflop ranges, an ICM / push-fold trainer, a bankroll tracker, hand-history import with leak-finding, and targeted drills. On-device and privacy-first — built for study away from the table, not real-time play.</p>
+          <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">On-device</span><span class="tag">ICM</span><span class="tag">MIT</span></div>
+          <span class="view">View on GitHub →</span>
+        </div>
+      </a>
     </div>
 
   </div>
