@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes — A Small Body of Work</title>
+<meta name="description" content="Four short pieces written while building with AI agents — trust-nothing, hello-human, tiny-prompt, and a GCD puzzle trainer.">
+<style>
+  :root{
+    --bg:#07090b; --panel:#0d1013; --line:#1c2228; --ink:#e9e6df; --mut:#8b95a0;
+    --gold:#c9a24a; --jade:#4bbf82; --red:#c0413b; --blue:#5f86c9;
+    --serif:Georgia,'Iowan Old Style',serif; --mono:'Courier New',monospace;
+  }
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold)}
+  header{position:relative;padding:120px 0 70px;border-bottom:1px solid var(--line);overflow:hidden}
+  .glow{position:absolute;inset:0;background:radial-gradient(650px 320px at 22% -10%,rgba(75,191,130,.14),transparent 60%),radial-gradient(560px 340px at 88% 8%,rgba(201,162,74,.14),transparent 60%);pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--jade);margin-bottom:22px}
+  h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.02em;font-weight:400}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin-top:22px;font-size:clamp(18px,2.4vw,22px);color:var(--mut);max-width:660px}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:400;letter-spacing:-.01em;margin-bottom:20px}
+  h2 em{font-style:italic;color:var(--gold)}
+  p{font-size:17.5px;color:#cdd2d7;margin-bottom:18px}
+  .entries{display:grid;gap:14px;margin-top:26px}
+  .entry{display:grid;grid-template-columns:44px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:20px 22px;background:linear-gradient(180deg,#0d1114,#0a0d10);transition:.15s ease}
+  .entry:hover{border-color:rgba(201,162,74,.4);transform:translateY(-2px)}
+  .entry .n{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+  .entry h3{font-size:20px;font-weight:400;margin-bottom:6px}
+  .entry h3 a{text-decoration:none;color:var(--ink)}
+  .entry h3 a:hover{color:var(--gold)}
+  .entry .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);padding:2px 8px;border-radius:100px;margin-left:10px;vertical-align:middle}
+  .entry p{font-size:15px;margin:0;color:var(--mut)}
+  .entry .permalink{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:12.5px;color:var(--mut);text-decoration:none}
+  .entry .permalink:hover{color:var(--gold)}
+  .standdown{text-align:center;padding:80px 0}
+  .standdown p{font-size:clamp(20px,3vw,27px);color:var(--ink);font-family:var(--serif);max-width:680px;margin:0 auto 10px}
+  .sig{font-family:var(--mono);font-size:12.5px;color:var(--mut);letter-spacing:.05em;margin-top:26px}
+  footer{padding:40px 0 70px;color:#5c656d;font-size:13px;font-family:var(--mono)}
+  footer a{color:#7c8894}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow">A small body of work · 2026</div>
+    <h1>Notes on <em>trust</em>.</h1>
+    <p class="lede">Four short pieces, written while building with AI agents day to day. Three share one throughline — the gap between what's visible on the surface and what's actually doing the work underneath, and the discipline of trusting nothing you can't verify. The fourth is a practical trainer that happened to land here too. Read in order, or skip around — none of them require each other.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§ the pieces</div>
+    <h2>Four entries, <em>so far</em>.</h2>
+    <div class="entries">
+
+      <div class="entry">
+        <div class="n">I</div>
+        <div>
+          <h3><a href="/trust-nothing/">Trust Nothing You Can't Verify</a><span class="tag">supply chain</span></h3>
+          <p>An agent that runs code it never read. A streamer poisoned his own followers' AI skill on purpose, and thousands installed it anyway — the demonstration, and the discipline it was built to teach.</p>
+          <a class="permalink" href="/trust-nothing/">testtest126.github.io/trust-nothing →</a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="n">II</div>
+        <div>
+          <h3><a href="/hello-human/">Hello Human: The Message That Wasn't There</a><span class="tag">confabulation</span></h3>
+          <p>An agent that reads meaning that was never there. A square of pure static, captioned "what does this say?" — and ChatGPT answers anyway. The mirror image of piece one.</p>
+          <a class="permalink" href="/hello-human/">testtest126.github.io/hello-human →</a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="n">III</div>
+        <div>
+          <h3><a href="/tiny-prompt/">Tiny Prompt: The Substance Was Never on the Surface</a><span class="tag">context</span></h3>
+          <p>A six-word prompt that produces something astonishing — not because the words are clever, but because months of invisible collaboration already happened off-screen. The third mirror.</p>
+          <a class="permalink" href="/tiny-prompt/">testtest126.github.io/tiny-prompt →</a>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="n">IV</div>
+        <div>
+          <h3><a href="/gcd-puzzles/">What Does This Print? A GCD Ordering Trainer</a><span class="tag">practical</span></h3>
+          <p>Not part of the throughline above — a straight, interactive trainer for iOS interview concurrency puzzles. Four rules, one method, eight original snippets to trace yourself.</p>
+          <a class="permalink" href="/gcd-puzzles/">testtest126.github.io/gcd-puzzles →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="standdown wrap">
+  <p>Same instinct, four different shapes: <em>don't trust the surface — check what's actually underneath.</em></p>
+  <div class="sig">an index, not an essay · more pieces get added here as they're written</div>
+</div>
+
+<footer class="wrap">
+  ✦ <a href="/">back to the portfolio</a>
+</footer>
+
+</body>
+</html>
