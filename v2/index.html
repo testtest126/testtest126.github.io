@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yakiv Kovalskyi</title>
+<meta name="description" content="Yakiv Kovalskyi builds native iOS apps in Swift — a chess engine with realtime multiplayer, an on-device AI demo, a consent-first horror game, and open-source AI-agent tooling.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://testtest126.github.io/v2/">
+<meta property="og:title" content="Yakiv Kovalskyi — iOS · Swift · AI-native">
+<meta property="og:description" content="Native iOS apps in Swift — a chess engine with realtime multiplayer, an on-device AI demo, a consent-first horror game, and open-source AI-agent tooling.">
+<meta property="og:image" content="https://testtest126.github.io/assets/chess-game.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090b'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' font-weight='700' fill='%23c9a24a' text-anchor='middle'%3EYK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07090b;
+    --panel:#0e1114;
+    --panel-2:#12161a;
+    --line:#1e242b;
+    --line-soft:#171c22;
+    --ink:#e9e6df;
+    --mut:#8f98a3;
+    --gold:#c9a24a;
+    --gold-soft:rgba(201,162,74,.35);
+    --jade:#4bbf82;
+    --red:#c0413b;
+    --blue:#5f86c9;
+    --radius:16px;
+    --serif:'Fraunces',Georgia,'Iowan Old Style',serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:'JetBrains Mono','Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  .grain{
+    position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.035;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:var(--gold)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:3px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ornamental rule */
+  .ornament{display:flex;align-items:center;gap:16px;max-width:1080px;margin:0 auto;padding:0 24px}
+  .ornament::before,.ornament::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-soft),transparent)}
+  .ornament svg{flex-shrink:0;opacity:.85}
+
+  /* hero */
+  header.hero{position:relative;padding:130px 0 76px;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero-glow{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(650px 320px at 18% -12%, rgba(201,162,74,.16), transparent 60%),
+      radial-gradient(560px 340px at 92% 6%, rgba(75,191,130,.10), transparent 60%);
+  }
+  .hero-inner{position:relative;z-index:1}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);
+    border:1px solid var(--gold-soft);
+    padding:6px 14px 6px 12px;border-radius:100px;margin-bottom:28px;
+  }
+  .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--jade);box-shadow:0 0 8px 1px rgba(75,191,130,.6)}
+  h1{
+    font-family:var(--serif);
+    font-optical-sizing:auto;
+    font-size:clamp(42px,7.2vw,84px);
+    font-weight:600;letter-spacing:-.01em;line-height:1.02;
+    margin-bottom:24px;
+  }
+  h1 .last{
+    font-style:italic;font-weight:500;
+    background:linear-gradient(100deg,#fff 0%,var(--gold) 65%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{
+    font-size:clamp(17.5px,2.1vw,20px);color:var(--mut);max-width:600px;
+    line-height:1.65;
+  }
+  .lede::first-letter{
+    font-family:var(--serif);font-weight:600;font-size:3.4em;line-height:.78;
+    float:left;padding:5px 9px 0 0;color:var(--gold);
+  }
+  .cta{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:12px 22px;border-radius:11px;font-weight:600;font-size:15px;font-family:var(--sans);
+    text-decoration:none;transition:.18s ease;
+  }
+  .btn.primary{background:var(--gold);color:#1a1408}
+  .btn.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* work section */
+  section.work{padding:72px 0 44px}
+  .kicker{
+    font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--mut);margin-bottom:14px;
+  }
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:38px;gap:16px;flex-wrap:wrap}
+  .sec-head h2{font-family:var(--serif);font-size:32px;font-weight:600;letter-spacing:-.01em}
+  .sec-head .count{color:var(--mut);font-size:13.5px;font-family:var(--mono)}
+
+  /* featured card */
+  .featured{
+    position:relative;
+    background:linear-gradient(155deg,var(--panel-2),var(--panel));
+    border:1px solid var(--gold-soft);
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:26px;
+    transition:.25s ease;
+    box-shadow:0 30px 70px -40px rgba(201,162,74,.25);
+  }
+  .featured:hover{transform:translateY(-3px);border-color:rgba(201,162,74,.6)}
+  .featured-link{display:flex;flex-direction:column;color:inherit;text-decoration:none;position:relative}
+  @media(min-width:761px){.featured-link{flex-direction:row}}
+  .featured .ribbon{
+    display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+    color:#1a1408;background:var(--gold);
+    padding:5px 12px;border-radius:100px;
+    box-shadow:0 6px 18px -6px rgba(201,162,74,.6);
+    margin-bottom:14px;
+  }
+  .featured .device-frame{
+    width:100%;height:230px;flex-shrink:0;
+  }
+  @media(min-width:761px){.featured .device-frame{width:400px;height:auto}}
+  .featured .body{padding:30px 30px 28px;display:flex;flex-direction:column;flex:1;justify-content:center}
+  .featured h3{font-family:var(--serif);font-size:25px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .featured .role{color:var(--gold);font-size:13.5px;font-weight:600;margin-bottom:12px;font-family:var(--mono);letter-spacing:.01em}
+  .featured p{color:var(--mut);font-size:15.5px;line-height:1.65;margin-bottom:16px}
+  .featured .view{color:var(--ink);font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-family:var(--sans)}
+  .featured-link:hover .view{color:var(--gold)}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{
+    position:relative;
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    transition:.22s ease;
+    overflow:hidden;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--gold-soft)}
+  .card::before{
+    content:"";position:absolute;left:0;top:0;height:3px;width:100%;
+    background:var(--bar,linear-gradient(90deg,var(--gold),transparent));
+    opacity:.9;z-index:1;
+  }
+  .card-link{
+    position:relative;display:flex;flex-direction:column;height:100%;
+    padding:24px 24px 22px;color:inherit;text-decoration:none;
+  }
+  .device-frame{
+    --frame-h:222px;
+    height:var(--frame-h);margin-bottom:18px;border-radius:13px;
+    overflow:hidden;position:relative;
+    background:linear-gradient(160deg, rgba(255,255,255,.04), rgba(255,255,255,0) 45%), #0a0c0e;
+    border:1px solid var(--line);
+    box-shadow:0 14px 30px -20px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+  .device-frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;transition:transform .4s ease}
+  .card-link:hover .device-frame img,.featured-link:hover .device-frame img{transform:scale(1.035)}
+  .device-frame.browser{--frame-h:266px;display:flex;flex-direction:column;background:#0a0c0e}
+  .device-frame.browser img{flex:1 1 auto;min-height:0;width:100%;object-fit:cover;object-position:top center}
+  .device-frame.browser .chrome{
+    flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 13px;
+    background:#14181c;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;
+  }
+  .device-frame.browser .chrome .dot{width:8px;height:8px;border-radius:50%;background:#2e343b}
+  .device-frame.browser .chrome .dot:nth-child(1){background:#3d444c}
+  .device-frame.browser .chrome .url{
+    margin-left:8px;flex:1;font-size:11px;font-family:var(--mono);color:var(--mut);
+    background:#07090b;border:1px solid var(--line);border-radius:7px;
+    padding:3px 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  a.chrome:hover .url{color:var(--gold);border-color:var(--gold-soft)}
+  .card h3{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:9px}
+  .pill{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:100px;letter-spacing:.03em;font-family:var(--mono);text-transform:uppercase}
+  .pill.pub{background:rgba(95,134,201,.16);color:#a9c1ef}
+  .card .role{color:var(--gold);font-size:12.5px;font-weight:600;margin-bottom:11px;font-family:var(--mono)}
+  .card p{color:var(--mut);font-size:14.5px;flex:1;line-height:1.6}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 15px}
+  .tag{font-size:11px;color:var(--mut);border:1px solid var(--line);padding:3px 9px;border-radius:7px;font-family:var(--mono)}
+  .card .view{color:var(--ink);font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-family:var(--sans)}
+  .card-link:hover .view{color:var(--gold)}
+  .card-link:focus-visible,.featured-link:focus-visible{outline:2px solid var(--gold);outline-offset:-3px;border-radius:15px}
+  .card.split{display:flex;flex-direction:column;height:100%;padding:24px 24px 22px}
+  .card.split .card-link{padding:0;flex:1;height:auto}
+
+  footer{border-top:1px solid var(--line);padding:48px 0 60px;margin-top:20px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--mut);font-size:14px}
+  .foot a{color:var(--mut);text-decoration:none}
+  .foot a:hover{color:var(--gold)}
+  .sig{font-family:var(--mono);font-size:12px;color:#5b6470;margin-top:18px;letter-spacing:.02em}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span>iOS · Swift · AI-native</span>
+    <h1>Yakiv <span class="last">Kovalskyi</span></h1>
+    <p class="lede">I build native iOS apps in pure Swift — a chess engine with realtime multiplayer, an on-device AI demo, a consent-first horror game, and the conventions that let AI agents work on any repo.</p>
+    <div class="cta">
+      <a class="btn primary" href="#work">View projects ↓</a>
+      <a class="btn ghost" href="https://github.com/testtest126" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="ornament" style="margin-top:52px">
+  <svg width="15" height="15" viewBox="0 0 15 15"><path d="M7.5 0L9 6l6 1.5L9 9l-1.5 6L6 9 0 7.5 6 6z" fill="none" stroke="#c9a24a" stroke-width="1" opacity="0.9"/></svg>
+</div>
+
+<section class="work wrap" id="work">
+  <div class="kicker">§ portfolio</div>
+  <div class="sec-head">
+    <h2>Selected work</h2>
+    <span class="count">5 projects · all open source</span>
+  </div>
+
+  <div class="featured">
+    <a class="featured-link" href="https://github.com/testtest126/poker" target="_blank" rel="noopener">
+      <div class="device-frame phone"><img src="/assets/poker-preflop.jpg" width="750" height="632" alt="Poker Study Preflop Range Viewer — BTN position selected, 13×13 hand grid lit up in dark mode" loading="lazy"></div>
+      <div class="body">
+        <span class="ribbon">✦ Newest build</span>
+        <h3>poker</h3>
+        <div class="role">Personalized NLHE tournament study helper</div>
+        <p>Study your actual leaks, not generic charts. A No-Limit Hold'em tournament prep companion personalized to each player's own tendencies — preflop ranges, an ICM / push-fold trainer, bankroll tracking, hand-history leak-finding, and targeted drills. On-device and privacy-first, built for study away from the table.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">On-device</span><span class="tag">ICM</span><span class="tag">MIT</span></div>
+        <span class="view">View on GitHub →</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="grid">
+
+    <div class="card" style="--bar:linear-gradient(90deg,#c9a24a,transparent)">
+      <a class="card-link" href="https://github.com/testtest126/chess" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="/assets/chess-game.jpg" width="750" height="1337" style="object-position:center 40%" alt="MateMate mid-game board, dark blue theme, with move history" loading="lazy"></div>
+        <h3>MateMate <span class="pill pub">chess</span></h3>
+        <div class="role">iOS chess app · Swift + Vapor</div>
+        <p>Real chess, played fair. Built-in engine, realtime multiplayer over a Vapor backend, post-game analysis — server-authoritative, so no client can cheat the result.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">Vapor</span><span class="tag">WebSockets</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
+    </div>
+
+    <div class="card" style="--bar:linear-gradient(90deg,#c0413b,transparent)">
+      <a class="card-link" href="https://github.com/testtest126/LULL" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="/assets/lull-eye.jpg" width="750" height="1090" style="object-position:center 100%" alt="LULL consent screen — a sleep aid, let it watch or not tonight" loading="lazy"></div>
+        <h3>LULL <span class="pill pub">horror</span></h3>
+        <div class="role">Psychological horror game · consent-first</div>
+        <p>A horror game that turns the phone's own intimacy against the player — and asks first. Forbidden sensors can't even be named in code; the safety rule is enforced by the type system.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">AVFoundation</span><span class="tag">MIT</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
+    </div>
+
+    <div class="card" style="--bar:linear-gradient(90deg,#5f86c9,transparent)">
+      <a class="card-link" href="https://github.com/testtest126/ai-demo" target="_blank" rel="noopener">
+        <div class="device-frame phone"><img src="/assets/ai-demo-parser.jpg" width="750" height="417" style="object-position:left top" alt="ai-demo Argument Parser tab — a filled command parsed into structured task, detail, and review fields" loading="lazy"></div>
+        <h3>ai-demo <span class="pill pub">on-device AI</span></h3>
+        <div class="role">Apple FoundationModels · SwiftUI</div>
+        <p>On-device AI, zero network calls. A focused demo of Apple's FoundationModels framework — local inference in SwiftUI, SwiftData-backed, graceful when the model isn't available.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">FoundationModels</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
+    </div>
+
+    <div class="card split" style="--bar:linear-gradient(90deg,#4bbf82,transparent)">
+      <div class="device-frame browser">
+        <a class="chrome" href="https://testtest126.github.io/agent-ready/" target="_blank" rel="noopener" aria-label="Open agent-ready live demo"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">testtest126.github.io/agent-ready ↗</span></a>
+        <a href="https://github.com/testtest126/agent-ready" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="/assets/agent-ready-arch.jpg" width="900" height="608" alt="agent-ready architecture docs — Single source of truth, thin adapters, with a diagram of AGENTS.md feeding CLAUDE.md, copilot-instructions, and .cursor/rules" loading="lazy">
+        </a>
+      </div>
+      <a class="card-link" href="https://github.com/testtest126/agent-ready" target="_blank" rel="noopener">
+        <h3>agent-ready <span class="pill pub">tooling</span></h3>
+        <div class="role">Conventions for AI collaboration</div>
+        <p>One rules file, every AI tool reads it. Pluggable conventions that make any repo AI-ready — a single AGENTS.md, thin adapters for Claude Code / Copilot / Cursor, plus a memory scaffold.</p>
+        <div class="tags"><span class="tag">Shell</span><span class="tag">AGENTS.md</span><span class="tag">DX</span><span class="tag">MIT</span></div>
+        <span class="view">View on GitHub →</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="ornament" style="margin:8px 0 0">
+  <svg width="15" height="15" viewBox="0 0 15 15"><path d="M7.5 0L9 6l6 1.5L9 9l-1.5 6L6 9 0 7.5 6 6z" fill="none" stroke="#c9a24a" stroke-width="1" opacity="0.9"/></svg>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <span>© 2026 Yakiv Kovalskyi</span>
+      <div class="sig">v2 preview · built solo · no analytics</div>
+    </div>
+    <span>
+      <a href="https://github.com/testtest126" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="mailto:ykovalsky.up@gmail.com">Email</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
