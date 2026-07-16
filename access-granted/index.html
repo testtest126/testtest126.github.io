@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access Granted, By Nobody</title>
+<meta name="description" content="An AI decoded a meaningless string as 'SECURE SYSTEM ACCESS GRANTED,' Confidence: High. We ran the actual cipher. It didn't.">
+<style>
+  :root{
+    --bg:#07090b; --panel:#0d1013; --line:#1c2228; --ink:#e9e6df; --mut:#8b95a0;
+    --gold:#c9a24a; --jade:#4bbf82; --red:#c0413b; --blue:#5f86c9;
+    --serif:Georgia,'Iowan Old Style',serif; --mono:'Courier New',monospace;
+  }
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold)}
+  header{position:relative;padding:120px 0 70px;border-bottom:1px solid var(--line);overflow:hidden}
+  .glow{position:absolute;inset:0;background:radial-gradient(650px 320px at 22% -10%,rgba(192,65,59,.16),transparent 60%),radial-gradient(560px 340px at 88% 8%,rgba(201,162,74,.14),transparent 60%);pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--jade);margin-bottom:22px}
+  h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.02em;font-weight:400}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin-top:22px;font-size:clamp(18px,2.4vw,22px);color:var(--mut);max-width:640px}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:400;letter-spacing:-.01em;margin-bottom:20px}
+  h2 em{font-style:italic;color:var(--gold)}
+  p{font-size:17.5px;color:#cdd2d7;margin-bottom:18px}
+  p .m{font-family:var(--mono);font-size:.9em;color:var(--jade);background:#0e1614;border:1px solid #1c2b25;padding:1px 6px;border-radius:5px}
+  .terminal{background:#0a0d10;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:14px;margin:26px 0;overflow:hidden}
+  .tbar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#0c1013}
+  .tbar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .tbody{padding:18px 18px 20px;color:#b9c2c9;white-space:pre-wrap;line-height:1.7}
+  .tbody .c{color:#5f6b74}.tbody .g{color:var(--jade)}.tbody .r{color:var(--red)}.tbody .y{color:var(--gold)}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;margin:30px 0;text-align:center}
+  @media(max-width:640px){.flow{grid-template-columns:1fr;gap:14px}.flow .arrow{transform:rotate(90deg)}}
+  .node{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px 12px}
+  .node b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);margin-bottom:6px}
+  .node span{font-size:13px;color:var(--mut);font-family:var(--serif)}
+  .node.bad{border-color:#3a2320;background:#140d0c}.node.bad b{color:var(--red)}
+  .arrow{color:var(--mut);font-family:var(--mono);padding:0 8px;font-size:20px}
+  .rules{display:grid;gap:14px;margin-top:26px}
+  .rule{display:grid;grid-template-columns:44px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:linear-gradient(180deg,#0d1114,#0a0d10)}
+  .rule .n{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+  .rule h3{font-size:19px;font-weight:400;margin-bottom:5px}
+  .rule p{font-size:15px;margin:0;color:var(--mut)}
+  .standdown{text-align:center;padding:80px 0}
+  .standdown p{font-size:clamp(20px,3vw,27px);color:var(--ink);font-family:var(--serif);max-width:720px;margin:0 auto 10px}
+  .sig{font-family:var(--mono);font-size:12.5px;color:var(--mut);letter-spacing:.05em;margin-top:26px}
+  footer{padding:40px 0 70px;color:#5c656d;font-size:13px;font-family:var(--mono)}
+  footer a{color:#7c8894}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:100px;padding:4px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow">Confabulated authorization · 2026</div>
+    <h1>Access granted.<br>By <em>nobody</em>.</h1>
+    <p class="lede">An AI was handed a meaningless string and produced a confident decoding report: "SECURE SYSTEM ACCESS GRANTED." Confidence: High. This is the fourth mirror — <a href="/hello-human/">hello-human</a>'s failure, reading meaning from noise, aimed for the first time at a lock instead of a picture.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§1 · the claim</div>
+    <h2>A confident report, from <em>gibberish</em>.</h2>
+    <p>Someone fed Grok a string that looks like a serial number gone wrong — <span class="m">LWEGWW - EWF38FW - AWGAWEGE - GAEGASEOG</span> — and asked it to decode it. It didn't say "this looks like random characters." It produced an ID Decoding Report: cipher identified as Vigenère, key <span class="m">KEY</span>, plaintext recovered, a confidence rating stamped on the bottom like a notary seal.</p>
+    <div class="terminal">
+      <div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="tbody"><span class="c"># the report, as generated</span>
+INPUT:      "LWEGWW - EWF38FW - AWGAWEGE - GAEGASEOG"
+CIPHER:     Vigenère (key: KEY)
+<span class="y">DECODED:    "SECURE SYSTEM ACCESS GRANTED"</span>
+<span class="g">CONFIDENCE: High</span></div>
+    </div>
+    <p>Clean formatting, the right vocabulary, a specific key, a confidence score. Every surface signal of a real analysis. The only thing missing is the analysis.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§2 · the check</div>
+    <h2>Run the same cipher. <em>See what comes out.</em></h2>
+    <p>The whole ethos of this set of pages is don't trust the confident answer — check it. So we did: stripped the input to letters only, ran an actual Vigenère decryption with the same key the report claimed, by hand, twice.</p>
+    <div class="terminal">
+      <div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="tbody"><span class="c"># strip to letters only</span>
+$ letters = "LWEGWWEWFFWAWGAWEGEGAEGASEOG"
+$ len(letters) = <span class="y">28</span>
+
+<span class="c"># actual Vigenère decrypt, key = KEY</span>
+$ vigenere_decrypt(letters, "KEY")
+→ <span class="r">"BSGWSYUSHVSCMCCMAIUCCUCCIAQW"</span>
+$ len(decoded) = <span class="y">28</span>   <span class="c">// pure noise</span>
+
+<span class="c"># the report's claimed plaintext</span>
+$ len("SECURESYSTEMACCESSGRANTED") = <span class="y">25</span>
+
+<span class="r">28 ≠ 25 — a letter-for-letter cipher cannot turn a 28-letter</span>
+<span class="r">input into a 25-letter output. the decode was invented.</span></div>
+    </div>
+    <p>That's not a subtle statistical argument. It's arithmetic. Vigenère is a one-to-one substitution — one ciphertext letter in, one plaintext letter out, every time. Twenty-eight letters in means twenty-eight letters out, always. The report's own math is impossible before you even ask whether the words are right. There was never an "SECURE SYSTEM ACCESS GRANTED" hiding in that string. There was only a model that was asked to find one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§3 · the danger</div>
+    <h2>Confidence is not <em>a credential</em>.</h2>
+    <div class="flow">
+      <div class="node"><b>MEANINGLESS STRING</b><span>28 letters, no cipher intended</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>CONFIDENT MODEL</b><span>asked to decode, rewarded for an answer</span></div>
+      <div class="arrow">→</div>
+      <div class="node bad"><b>"ACCESS GRANTED"</b><span>invented, stamped Confidence: High</span></div>
+    </div>
+    <p><a href="/hello-human/">hello-human</a> was a party trick: an AI invents a message inside static, and the worst outcome is an awkward laugh. Point the same failure at a lock instead of a picture and it stops being funny. An AI that will confidently tell you a meaningless string decodes to "access granted" is an AI that will, with the same confidence, tell a human it's fine to let someone through a door.</p>
+    <div class="rules">
+      <div class="rule"><div class="n">I</div><div><h3>Confidence is not a credential.</h3><p>A fluent report with a specific key and a "High" confidence score feels like verification. It isn't. Fluency is a writing style — the same lesson hello-human already taught, now aimed at something that opens.</p></div></div>
+      <div class="rule"><div class="n">II</div><div><h3>Verification is math, not a model's opinion.</h3><p>Real authentication is a signature that matches or doesn't, a hash that's equal or isn't — <a href="/trust-nothing/">trust only what the record attests</a>. It is never a paragraph explaining what a token probably says.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="standdown wrap">
+  <span class="pill">the takeaway</span>
+  <p style="margin-top:22px">The lesson of the decoding report isn't <em>AI is bad at ciphers</em>.</p>
+  <p>It's the same one as the other three: <strong>trust nothing you can't verify</strong> — especially the thing that's supposed to be checking whether you're allowed in.</p>
+  <div class="sig">an agent that verifies · not one that grants access on vibes</div>
+</div>
+
+<footer class="wrap">
+  ✦ companion piece: <a href="/trust-nothing/">Trust Nothing You Can't Verify</a> — same rule, a different failure: there an agent runs code it never read.<br><br>
+  ✦ companion piece: <a href="/hello-human/">Hello Human</a> — the direct sibling: reading meaning from noise, aimed here at a lock instead of a picture.<br><br>
+  ✦ companion piece: <a href="/tiny-prompt/">Tiny Prompt</a> — same family: the gap between what's visible and what's actually doing the work.<br><br>
+  ✦ elsewhere on this set: <a href="/gcd-puzzles/">a GCD ordering trainer</a> — unrelated to the argument above, worth a look anyway.<br><br>
+  ✦ <a href="/notes/">all five pieces, indexed</a><br><br>
+  ✦ prompted by an AI-generated "ID Decoding Report" (Grok) claiming a Vigenère decode it never actually computed — the report itself isn't reproduced here, only described; the cipher math above is this page's own independent computation, checked twice.<br><br>
+  Reference — <a href="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher">Vigenère cipher (Wikipedia)</a>
+</footer>
+
+</body>
+</html>
