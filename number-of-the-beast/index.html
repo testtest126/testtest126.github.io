@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Number of the Beast, Decoded By Everyone</title>
+<meta name="description" content="Revelation 13:18 ships as a decode challenge with no stated key. For 2,000 years the answer has obligingly turned into whatever enemy people already feared. Here's the arithmetic, checked.">
+<style>
+  :root{
+    --bg:#07090b; --panel:#0d1013; --line:#1c2228; --ink:#e9e6df; --mut:#8b95a0;
+    --gold:#c9a24a; --jade:#4bbf82; --red:#c0413b; --blue:#5f86c9;
+    --serif:Georgia,'Iowan Old Style',serif; --mono:'Courier New',monospace;
+  }
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  a{color:var(--gold)}
+  header{position:relative;padding:120px 0 70px;border-bottom:1px solid var(--line);overflow:hidden}
+  .glow{position:absolute;inset:0;background:radial-gradient(650px 320px at 22% -10%,rgba(192,65,59,.16),transparent 60%),radial-gradient(560px 340px at 88% 8%,rgba(201,162,74,.14),transparent 60%);pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--jade);margin-bottom:22px}
+  h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.02em;font-weight:400}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin-top:22px;font-size:clamp(18px,2.4vw,22px);color:var(--mut);max-width:660px}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:400;letter-spacing:-.01em;margin-bottom:20px}
+  h2 em{font-style:italic;color:var(--gold)}
+  p{font-size:17.5px;color:#cdd2d7;margin-bottom:18px}
+  p .m{font-family:var(--mono);font-size:.9em;color:var(--jade);background:#0e1614;border:1px solid #1c2b25;padding:1px 6px;border-radius:5px}
+  blockquote{border-left:2px solid var(--gold);margin:26px 0;padding:4px 0 4px 22px;font-size:19px;color:var(--ink);font-style:italic}
+  blockquote cite{display:block;margin-top:8px;font-family:var(--mono);font-style:normal;font-size:12.5px;color:var(--mut);letter-spacing:.04em}
+  .terminal{background:#0a0d10;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:14px;margin:26px 0;overflow:hidden}
+  .tbar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#0c1013}
+  .tbar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .tbody{padding:18px 18px 20px;color:#b9c2c9;white-space:pre-wrap;line-height:1.7;overflow-x:auto}
+  .tbody .c{color:#5f6b74}.tbody .g{color:var(--jade)}.tbody .r{color:var(--red)}.tbody .y{color:var(--gold)}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;margin:30px 0;text-align:center}
+  @media(max-width:640px){.flow{grid-template-columns:1fr;gap:14px}.flow .arrow{transform:rotate(90deg)}}
+  .node{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px 12px}
+  .node b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);margin-bottom:6px}
+  .node span{font-size:13px;color:var(--mut);font-family:var(--serif)}
+  .node.bad{border-color:#3a2320;background:#140d0c}.node.bad b{color:var(--red)}
+  .arrow{color:var(--mut);font-family:var(--mono);padding:0 8px;font-size:20px}
+  .rules{display:grid;gap:14px;margin-top:26px}
+  .rule{display:grid;grid-template-columns:44px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:linear-gradient(180deg,#0d1114,#0a0d10)}
+  .rule .n{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+  .rule h3{font-size:19px;font-weight:400;margin-bottom:5px}
+  .rule p{font-size:15px;margin:0;color:var(--mut)}
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}
+  @media(max-width:700px){.gallery{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:12px;padding:20px 22px;background:linear-gradient(180deg,#0d1114,#0a0d10)}
+  .card .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);padding:2px 8px;border-radius:100px;margin-bottom:10px}
+  .card h3{font-size:18px;font-weight:400;margin-bottom:8px;color:var(--ink)}
+  .card p{font-size:14.5px;margin:0;color:var(--mut)}
+  .card .math{display:block;margin-top:10px;font-family:var(--mono);font-size:12.5px;color:var(--jade)}
+  .card.coincidence{border-color:#2a2416}
+  .card.coincidence .tag{color:var(--gold);border-color:#3a3220}
+  .standdown{text-align:center;padding:80px 0}
+  .standdown p{font-size:clamp(20px,3vw,27px);color:var(--ink);font-family:var(--serif);max-width:720px;margin:0 auto 10px}
+  .sig{font-family:var(--mono);font-size:12.5px;color:var(--mut);letter-spacing:.05em;margin-top:26px}
+  footer{padding:40px 0 70px;color:#5c656d;font-size:13px;font-family:var(--mono)}
+  footer a{color:#7c8894}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:100px;padding:4px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow">The oldest confabulated cipher · c. 95 AD – 2026</div>
+    <h1>Six hundred sixty-six.<br>Everyone <em>solved</em> it.</h1>
+    <p class="lede">Revelation 13:18 doesn't just state a number — it dares you to compute one: "let the one who has understanding calculate the number of the beast." For two thousand years, readers have taken that dare, and the number has obligingly turned into whoever they already feared: Nero, the Pope, Napoleon, Hitler, a barcode, the World Wide Web. One of those readings has real evidence behind it. The rest are what happens when a puzzle ships without a key.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§1 · the dare</div>
+    <h2>A text that <em>asks</em> to be decoded.</h2>
+    <p>Most of Revelation is imagery you're meant to feel, not compute. Chapter 13 is different — it stops and hands the reader an explicit assignment:</p>
+    <blockquote>"Here is wisdom. Let him that hath understanding count the number of the beast: for it is the number of a man; and his number is Six hundred threescore and six."<cite>Revelation 13:18, King James Version</cite></blockquote>
+    <p>That's a decode challenge with the method implied — ancient readers would have recognized "count" as an invitation to gematria, letters standing in for numbers — but no key supplied. No alphabet specified, no name given, no rule for what to include. Whoever "solves" it has to bring their own target and their own method. Which means, for two thousand years running, whoever solved it got exactly the enemy they walked in with.</p>
+    <div class="terminal">
+      <div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="tbody"><span class="c"># the puzzle, as shipped</span>
+INPUT:   666 <span class="c">(a number, stated as a man's name in code)</span>
+METHOD:  gematria <span class="c">(implied by "count" — not specified further)</span>
+KEY:     <span class="r">not given</span> — no alphabet, no candidate name, no rule
+SOLVE:   <span class="y">x, such that count(x) = 666</span>
+<span class="c"># an underdetermined system has infinite solutions.</span>
+<span class="c"># pick x first, and you can usually reverse-engineer a method that fits.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§2 · the check</div>
+    <h2>Run the actual <em>cipher</em>.</h2>
+    <p>One reading has real philological weight. Revelation was written in Greek, but the calculation only works if you transliterate a name into Hebrew and sum the standard letter-values — and one name does it cleanly: <strong>Nero Caesar</strong>. Since the 1830s this has been the leading scholarly reading, and it's the one this page can actually run the math on.</p>
+    <div class="terminal">
+      <div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="tbody"><span class="c"># Hebrew gematria — נרון קסר, "Neron Kesar" (Nero Caesar)</span>
+נ nun    = 50
+ר resh   = 200
+ו vav    = 6
+ן nun    = 50
+          -------
+  "Neron"  = <span class="y">306</span>
+
+ק qof    = 100
+ס samekh = 60
+ר resh   = 200
+          -------
+  "Kesar"  = <span class="y">360</span>
+
+  306 + 360 = <span class="g">666</span></div>
+    </div>
+    <p>That alone would be a tidy coincidence. What makes it more than that is a manuscript variant. Papyrus 115, a 3rd-century fragment of Revelation, gives the number as <strong>616</strong>, not 666 — and 616 is exactly what you get if you spell "Nero" the short way, dropping the final Hebrew nun that turns it into "Neron":</p>
+    <div class="terminal">
+      <div class="tbar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="tbody"><span class="c"># same name, one letter shorter — נרו קסר, "Nero Kesar"</span>
+נ nun    = 50
+ר resh   = 200
+ו vav    = 6
+          -------
+  "Nero"   = <span class="y">256</span>
+
+  256 + 360 (Kesar, unchanged) = <span class="g">616</span>
+
+<span class="c"># 666 − 50 (the dropped final nun) = 616. exact.</span></div>
+    </div>
+    <p>A copyist wouldn't produce that specific alternate number by accident. 616 is the tell: whoever wrote it understood 666 as a name spelled out in letters, and knew that a shorter spelling of the same name gives a shorter sum. That's not how you'd miscopy a purely symbolic number — it's exactly how you'd transmit a cipher whose mechanism you understood.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§3 · two thousand years of the same trick</div>
+    <h2>Whatever you feared, it <em>fit</em>.</h2>
+    <p>Once "count the letters" is established as the game, the game never stops. Every generation has run the same puzzle against its own worst fear and reported success. None of these have Nero's manuscript evidence behind them — but the arithmetic in each case is real, so here it is, checked.</p>
+    <div class="gallery">
+      <div class="card">
+        <span class="tag">gematria, Roman numerals</span>
+        <h3>The Pope — Vicarius Filii Dei</h3>
+        <p>Lutheran theologian Andreas Helwig published this in 1612: take the Latin phrase, keep only the letters that double as Roman numerals, add them up.</p>
+        <span class="math">V+I+C+I+V+I+L+I+I+D+I = 5+1+100+1+5+1+50+1+1+500+1 = 666</span>
+      </div>
+      <div class="card">
+        <span class="tag">gematria, tuned key</span>
+        <h3>Napoleon Bonaparte</h3>
+        <p>An 1813 pamphlet, "The Identity of Napoleon and Antichrist," ran two separate letter-number systems against his name — both were arranged so the total landed on 666.</p>
+        <span class="math">two different ciphers, one target number</span>
+      </div>
+      <div class="card">
+        <span class="tag">gematria, English alphabet</span>
+        <h3>Hitler</h3>
+        <p>Assign A=100, B=101, C=102... and sum the letters of the surname. The starting point is arbitrary — chosen, like every entry here, because it gets you somewhere.</p>
+        <span class="math">H+I+T+L+E+R = 107+108+119+111+104+117 = 666</span>
+      </div>
+      <div class="card coincidence">
+        <span class="tag">letter count, no cipher</span>
+        <h3>Ronald Wilson Reagan</h3>
+        <p>No key needed here — just count. Six letters, six letters, six letters. Reagan's own household took it seriously enough that after leaving office, they had their Bel Air house renumbered from 666 to 668 St. Cloud Road.</p>
+        <span class="math">len(RONALD)=6, len(WILSON)=6, len(REAGAN)=6</span>
+      </div>
+      <div class="card coincidence">
+        <span class="tag">visual pattern, not gematria</span>
+        <h3>UPC barcodes</h3>
+        <p>A 1982 book claimed the guard bars that mark a barcode's start, middle, and end are shaped like the digit 6. The barcode's own co-inventor, George Laurer, called it a coincidence — the guard bars encode no digit at all.</p>
+        <span class="math">pattern-matched, not computed</span>
+      </div>
+      <div class="card coincidence">
+        <span class="tag">digit repetition, not a sum</span>
+        <h3>WWW — the internet</h3>
+        <p>Hebrew vav is worth 6, and W is sometimes traced back to vav. Three of them, written out as digits, read 666. Note what this isn't: an actual gematria sum. Adding three vavs gives 18. The trick only works if you stop adding and start staring at the digits.</p>
+        <span class="math">6, 6, 6 → "666" (concatenated) ≠ 6+6+6 = 18 (summed)</span>
+      </div>
+    </div>
+    <p>Six different targets, four different methods, one number every one of them was built to reach. That last card is the whole essay in miniature: notice the trick stops being gematria — a defined sum — and quietly becomes "three sixes happen to be typeable next to each other." When the method has to bend to fit the answer, the method isn't doing any work anymore.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">§4 · the turn</div>
+    <h2>This is what a model does with <em>noise</em>.</h2>
+    <p>Every one of these readings starts from the same shape: an input with no single stated meaning, a reader under pressure to produce one anyway, and a confident, specific, plausible-sounding answer delivered as if it had been there all along. That's not a medieval failure mode. It's the exact mechanism behind <a href="/access-granted/">Access Granted</a>, where an AI turned a meaningless string into "SECURE SYSTEM ACCESS GRANTED, Confidence: High" — and behind <a href="/hello-human/">Hello Human</a>, where a square of pure static became a message the moment someone asked "what does this say?" 666 is the same failure with a two-thousand-year head start: human minds instead of neural networks, centuries instead of milliseconds, but the identical move — supply the missing key yourself, then report the result as discovery.</p>
+    <div class="flow">
+      <div class="node"><b>UNDERDETERMINED INPUT</b><span>a number, a string, a square of static — no key attached</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>READER SUPPLIES THE KEY</b><span>a feared name, a hoped-for cipher, a pattern in mind</span></div>
+      <div class="arrow">→</div>
+      <div class="node bad"><b>"DECODED"</b><span>confident, specific, and manufactured</span></div>
+    </div>
+    <div class="rules">
+      <div class="rule"><div class="n">I</div><div><h3>A method chosen after the target isn't a method.</h3><p>A=100 exists because it reaches Hitler; the Napoleon pamphlet ran two ciphers until one landed. Picking your cipher to fit your answer is the conclusion wearing the disguise of a calculation — the same move a model makes when it invents a Vigenère key that happens to spell what you were hoping to see.</p></div></div>
+      <div class="rule"><div class="n">II</div><div><h3>If everyone's answer "works," the puzzle isn't picking a winner.</h3><p>Nero, the Pope, Napoleon, Hitler, and Reagan cannot all be the correct decode of the same number. When a system will confidently hand you a different high-confidence answer every time you ask, that's not six successful decodes — it's <a href="/trust-nothing/">zero verifications</a>.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="standdown wrap">
+  <span class="pill">the takeaway</span>
+  <p style="margin-top:22px">The lesson of 666 isn't that ancient and modern readers were gullible.</p>
+  <p>It's the oldest known run of the discipline this whole set of pages keeps circling back to: <strong>trust nothing you can't verify</strong> — including the enemy the number seems to be pointing straight at.</p>
+  <div class="sig">an agent that verifies · not one that finds the answer it was already looking for</div>
+</div>
+
+<footer class="wrap">
+  ✦ companion piece: <a href="/access-granted/">Access Granted, By Nobody</a> — same failure, aimed at a lock: a model "decodes" a meaningless string into an authorization it never earned.<br><br>
+  ✦ companion piece: <a href="/hello-human/">Hello Human</a> — the direct sibling: reading a message out of a square of pure static.<br><br>
+  ✦ companion piece: <a href="/trust-nothing/">Trust Nothing You Can't Verify</a> — the rule all of these collapse to, from the opposite direction: an agent that runs code it never read.<br><br>
+  ✦ <a href="/notes/">all six pieces, indexed</a><br><br>
+  ✦ every sum on this page was computed programmatically before publication, not eyeballed — gematria, Roman numerals, letter counts, and the vav concatenation all check out as shown.<br><br>
+  Sources —
+  <a href="https://en.wikipedia.org/wiki/Number_of_the_beast">Number of the beast (Wikipedia)</a> ·
+  <a href="https://www.tyndalebulletin.org/article/29233-p115-and-the-number-of-the-beast.pdf">P.J. Williams, "P115 and the Number of the Beast" (Tyndale Bulletin)</a> ·
+  <a href="https://en.wikipedia.org/wiki/Papyrus_115">Papyrus 115 (Wikipedia)</a> ·
+  <a href="https://en.wikipedia.org/wiki/Vicarius_Filii_Dei">Vicarius Filii Dei (Wikipedia)</a> ·
+  <a href="https://www.masshist.org/beehiveblog/2018/03/from-absolute-monarchy-to-absolute-demon-identity-of-napoleon-and-antichrist/">The 1813 Napoleon-as-Antichrist pamphlet (Massachusetts Historical Society)</a> ·
+  <a href="https://www.samstorms.org/all-articles/post/june-6--2006:-some-observations-on-the-number-of-the-beast--666-">Sam Storms, "Some Observations on the Number of the Beast"</a> ·
+  <a href="https://en.wikipedia.org/wiki/668_St._Cloud_Road">668 St. Cloud Road (Wikipedia)</a> ·
+  <a href="https://www.snopes.com/fact-check/a-scan-of-wealth-and-taste/">Snopes: the barcode 666 claim</a>
+</footer>
+
+</body>
+</html>
