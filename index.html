@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yakiv Kovalskyi</title>
-<meta name="description" content="Yakiv Kovalskyi builds native iOS apps in Swift — a chess engine with realtime multiplayer, a Go app with an MCTS engine, an on-device AI demo, a consent-first horror game, and open-source AI-agent tooling.">
+<meta name="description" content="Yakiv Kovalskyi builds native iOS apps in Swift — a chess engine with realtime multiplayer, a Go app with an MCTS engine, an on-device AI demo, a consent-first horror game, open-source AI-agent tooling, and Palimpsest, a generative Go art piece that plays itself and forgets.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://testtest126.github.io/">
 <meta property="og:title" content="Yakiv Kovalskyi — iOS · Swift · AI-native">
-<meta property="og:description" content="Native iOS apps in Swift — a chess engine with realtime multiplayer, a Go app with an MCTS engine, an on-device AI demo, a consent-first horror game, and open-source AI-agent tooling.">
+<meta property="og:description" content="Native iOS apps in Swift — a chess engine with realtime multiplayer, a Go app with an MCTS engine, an on-device AI demo, a consent-first horror game, open-source AI-agent tooling, and Palimpsest, a generative Go art piece that plays itself and forgets.">
 <meta property="og:image" content="https://testtest126.github.io/assets/chess-game.jpg">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0c'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='26' font-weight='700' fill='%23c9a24a' text-anchor='middle'%3EYK%3C/text%3E%3C/svg%3E">
 <style>
@@ -144,6 +144,7 @@
     transition:color .15s ease,border-color .15s ease;
   }
   a.chrome:hover .url{color:var(--accent);border-color:rgba(201,162,74,.4)}
+  .card-link:hover .chrome .url{color:var(--accent);border-color:rgba(201,162,74,.4)}
   .card h3{font-size:19px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px}
   .pill{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;letter-spacing:.03em}
   .pill.pub{background:rgba(109,139,208,.16);color:#a9bef0}
@@ -169,7 +170,7 @@
   <div class="wrap hero-inner">
     <span class="eyebrow">iOS · Swift · AI-native</span>
     <h1>Yakiv <span class="grad">Kovalskyi</span></h1>
-    <p class="lede">I build native iOS apps in pure Swift — a chess engine with realtime multiplayer, a Go app with an MCTS engine, an on-device AI demo, a consent-first horror game, and the conventions that let AI agents work on any repo.</p>
+    <p class="lede">I build native iOS apps in pure Swift — a chess engine with realtime multiplayer, a Go app with an MCTS engine, an on-device AI demo, a consent-first horror game, and the conventions that let AI agents work on any repo. Also Palimpsest: a Go board that plays itself across time and forgets.</p>
     <div class="cta">
       <a class="btn primary" href="#projects">View projects ↓</a>
       <a class="btn ghost" href="https://github.com/testtest126" target="_blank">GitHub ↗</a>
@@ -180,7 +181,7 @@
 <section class="projects wrap" id="projects">
   <div class="sec-head">
     <h2>Selected work</h2>
-    <span>6 projects · all open source</span>
+    <span>7 projects · all open source</span>
   </div>
 
   <div class="grid">
@@ -250,11 +251,25 @@
     <div class="card" style="--bar:linear-gradient(90deg,#c68958,transparent)">
       <a class="card-link" href="https://github.com/testtest126/GoMate" target="_blank" rel="noopener">
         <div class="device-frame phone"><img src="assets/gomate-board.jpg" width="750" height="665" alt="GoMate mid-game 9×9 board — black and white stones on a warm wood goban, hoshi points" loading="lazy"></div>
-        <h3>GoMate <span class="pill new">newest</span></h3>
+        <h3>GoMate <span class="pill pub">Go</span></h3>
         <div class="role">iOS Go app · Swift + MCTS</div>
         <p>An all-Swift Go app — a 9/13/19 goban with the full ruleset (captures, ko, area scoring with komi), played against an MCTS engine, on a tested rules core.</p>
         <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">MCTS</span><span class="tag">MIT</span></div>
         <span class="view">View on GitHub →</span>
+      </a>
+    </div>
+
+    <div class="card" style="--bar:linear-gradient(90deg,#8f502b,transparent)">
+      <a class="card-link" href="https://testtest126.github.io/Palimpsest/" target="_blank" rel="noopener">
+        <div class="device-frame browser">
+          <span class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">testtest126.github.io/Palimpsest ↗</span></span>
+          <img src="assets/palimpsest-board.jpg" width="900" height="608" alt="Palimpsest board — crisp black and white stones over decaying ghost strata from dozens of earlier sessions, on a warm wood goban" loading="lazy">
+        </div>
+        <h3>Palimpsest <span class="pill new">newest</span></h3>
+        <div class="role">Generative Go art piece · plays itself, forgets</div>
+        <p>A Go board that plays itself across time and forgets: real self-play via a vendored Swift rules engine, rendered as a decaying palimpsest of ghosts and scars. The live board is playable — take on "the player" yourself, or watch it play itself.</p>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">JavaScript</span><span class="tag">Generative Art</span><span class="tag">MIT</span></div>
+        <span class="view">Play the live board →</span>
       </a>
     </div>
 
