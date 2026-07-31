@@ -42,8 +42,11 @@ the user explicitly asks for a homepage change in so many words.
 
 Its current known-good checksum:
 ```
-44d63058a9cc4609936b013a2ee756bb   (MD5)
+f0c2a3d2d15fcc736b17434a4ef16047   (MD5)
 ```
+(Updated after the explicitly-approved edit adding GoMate as a 6th project
+card — commit `68598fd` on `main`. Previous known-good value:
+`44d63058a9cc4609936b013a2ee756bb`.)
 Verify it's unchanged before starting work and again before committing:
 ```
 md5 index.html   # or: md5sum index.html
